@@ -1,16 +1,15 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Windows;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("PathFinderLibrary")]
+[assembly: AssemblyTitle("GeometryLibrary")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("PathFinderLibrary")]
+[assembly: AssemblyProduct("GeometryLibrary")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -21,7 +20,7 @@ using System.Windows;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("cdd6d18e-eeab-4feb-81ff-b6d3f9627616")]
+[assembly: Guid("2bcc8dd6-09ce-4a1c-a571-a773e83abfbd")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -35,13 +34,3 @@ using System.Windows;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-
-[assembly: ThemeInfo(ResourceDictionaryLocation.None,
- //where theme specific resource dictionaries are located
- //(used if a resource is not found in the     
- // or application resource dictionaries)
- ResourceDictionaryLocation.SourceAssembly
- //where the generic resource dictionary is located
- //(used if a resource is not found in the page,
- // app, or any theme specific resource dictionaries)
- )]

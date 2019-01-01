@@ -3,76 +3,25 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:extbehaviour="clr-namespace:WPFExtensions.AttachedBehaviours"
         xmlns:local="clr-namespace:PathFinderDemo" 
-        xmlns:pathfinder="clr-namespace:PathFinderLibrary;assembly=PathFinderLibrary"
+        xmlns:dwpf="clr-namespace:DiagramWpf;assembly=DiagramWpf"
+        
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800">
 
+    <TabControl>
+        <TabItem Header="PathFinder">
+            <local:UserControl1></local:UserControl1>
+        </TabItem>
 
-    <DockPanel >
-        <DockPanel.Resources>
-            <local:StringConverter x:Key="StringConverter" />
-        </DockPanel.Resources>
+        <TabItem Header="Nodes">
+            <local:UserControl2></local:UserControl2>
+        </TabItem>
 
-
-
-
-
-        <UniformGrid DockPanel.Dock="Bottom"  Rows="1" Columns="2">
-
-            <StackPanel Width="200" Margin="20">
-                <StackPanel.Resources>
-                    <local:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
-                </StackPanel.Resources>
-                <RadioButton Content="No Line" GroupName="PathLine" IsChecked="{Binding Path=PathLine, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static pathfinder:PathLine.None}}" />
-                <RadioButton Content="Straight Line" GroupName="PathLine" IsChecked="{Binding Path=PathLine, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static pathfinder:PathLine.Straight}}" />
-                <RadioButton Content="Orthogonal Line" GroupName="PathLine"  IsChecked="{Binding Path=PathLine, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static pathfinder:PathLine.Orthogonal}}" />
-            </StackPanel>
-
-            <StackPanel>
-                <UniformGrid Width="200" Margin="20">
-                    <Label Content="X1"/>
-                    <TextBlock Text="{Binding Path=(Canvas.Left),  ElementName=VertexOne ,Converter={StaticResource StringConverter}}" Background="LightGray"/>
-                    <Label Content="Y1"/>
-                    <TextBlock Text="{Binding Path=(Canvas.Top), ElementName=VertexOne ,Converter={StaticResource StringConverter}}" Background="LightGray"/>
-                </UniformGrid>
-                <UniformGrid Width="200" >
-                    <Label Content="X2"/>
-                    <TextBlock Text="{Binding Path=(Canvas.Left),  ElementName=VertexTwo ,Converter={StaticResource StringConverter}}" Background="LightGray"/>
-                    <Label Content="Y2"/>
-                    <TextBlock Text="{Binding Path=(Canvas.Top), ElementName=VertexTwo ,Converter={StaticResource StringConverter}}" Background="LightGray"/>
-                </UniformGrid>
-            </StackPanel>
-        </UniformGrid>
-
-        <Canvas Name="MainCanvas" DockPanel.Dock="Top">
-            <Polyline Name="PathFinderLine"
-                  Stroke="Gray"
-                    StrokeThickness="2" 
-            Points="{Binding ConnectionPoints, Converter={x:Static local:ConnectionPathConverter.Instance}}"/>
-
-            <Label Name="VertexOne"
-                           Content="VertexOne"
-                           extbehaviour:DragBehaviour.IsDragEnabled="True"
-                           extbehaviour:DragBehaviour.X="{Binding RelativeSource={RelativeSource Self},Path=(Canvas.Left)}"
-                           extbehaviour:DragBehaviour.Y="{Binding RelativeSource={RelativeSource Self},Path=(Canvas.Top)}"
-                                Background="CadetBlue"
-                           Canvas.Left="100"
-                           Canvas.Top="100">
-            </Label>
-            <Label Name="VertexTwo"
-                           Content="VertexTwo"
-                           extbehaviour:DragBehaviour.IsDragEnabled="True"
-                           extbehaviour:DragBehaviour.X="{Binding RelativeSource={RelativeSource Self},Path=(Canvas.Left)}"
-                           extbehaviour:DragBehaviour.Y="{Binding RelativeSource={RelativeSource Self},Path=(Canvas.Top)}"
-                           Background="AliceBlue"
-                           Canvas.Left="300"
-                           Canvas.Top="100">
-            </Label>
-
-
-        </Canvas>
-    </DockPanel>
+        <TabItem Header="Message Routing">
+            <local:UserControl3></local:UserControl3>
+        </TabItem>
+    </TabControl>
+ 
 
 </Window>

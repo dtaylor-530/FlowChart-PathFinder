@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathFinderDemo", "PathFinderDemo\PathFinderDemo.csproj", "{AA7D61D2-C952-4170-A798-244125B47230}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathFinderLibrary", "PathFinderLibrary\PathFinderLibrary.csproj", "{CDD6D18E-EEAB-4FEB-81FF-B6D3F9627616}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiagramWpf", "DiagramWpf\DiagramWpf.csproj", "{36311B6F-AA85-443E-A99E-53783C42287D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointWpf", "PointWpf\PointWpf.csproj", "{0A77E389-DAE9-44F9-B994-B027193B398D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimationPathWpf", "PathWpf\AnimationPathWpf.csproj", "{AC4EB6AD-BE3C-42EC-A78D-CA4DEEEAB696}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometryLibrary", "GeometryLibrary\GeometryLibrary.csproj", "{2BCC8DD6-09CE-4A1C-A571-A773E83ABFBD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA7D61D2-C952-4170-A798-244125B47230}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA7D61D2-C952-4170-A798-244125B47230}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA7D61D2-C952-4170-A798-244125B47230}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA7D61D2-C952-4170-A798-244125B47230}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDD6D18E-EEAB-4FEB-81FF-B6D3F9627616}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDD6D18E-EEAB-4FEB-81FF-B6D3F9627616}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDD6D18E-EEAB-4FEB-81FF-B6D3F9627616}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDD6D18E-EEAB-4FEB-81FF-B6D3F9627616}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36311B6F-AA85-443E-A99E-53783C42287D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36311B6F-AA85-443E-A99E-53783C42287D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36311B6F-AA85-443E-A99E-53783C42287D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36311B6F-AA85-443E-A99E-53783C42287D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A77E389-DAE9-44F9-B994-B027193B398D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A77E389-DAE9-44F9-B994-B027193B398D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A77E389-DAE9-44F9-B994-B027193B398D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A77E389-DAE9-44F9-B994-B027193B398D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC4EB6AD-BE3C-42EC-A78D-CA4DEEEAB696}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC4EB6AD-BE3C-42EC-A78D-CA4DEEEAB696}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC4EB6AD-BE3C-42EC-A78D-CA4DEEEAB696}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC4EB6AD-BE3C-42EC-A78D-CA4DEEEAB696}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BCC8DD6-09CE-4A1C-A571-A773E83ABFBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BCC8DD6-09CE-4A1C-A571-A773E83ABFBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BCC8DD6-09CE-4A1C-A571-A773E83ABFBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BCC8DD6-09CE-4A1C-A571-A773E83ABFBD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6B24E6E2-A73D-4404-8ED2-59B554BBF010}
+	EndGlobalSection
+EndGlobal
