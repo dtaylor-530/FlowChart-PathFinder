@@ -16,12 +16,15 @@ namespace AnimationPathWpf
 {
     public class AnimationPathControl : Control
     {
-        public static readonly DependencyProperty DiameterProperty = DependencyProperty.Register("Diameter", typeof(double), typeof(AnimationPathControl), new PropertyMetadata(100d, DiameterChanged));
+        private static double speed = 50d;
+        private static double diameter = 50d;
+        public static readonly DependencyProperty DiameterProperty = DependencyProperty.Register("Diameter", typeof(double), typeof(AnimationPathControl), new PropertyMetadata(diameter, DiameterChanged));
 
-        public static readonly DependencyProperty SpeedProperty = DependencyProperty.Register("Speed", typeof(double), typeof(AnimationPathControl), new PropertyMetadata(50d, SpeedChanged));
+        public static readonly DependencyProperty SpeedProperty = DependencyProperty.Register("Speed", typeof(double), typeof(AnimationPathControl), new PropertyMetadata(speed, SpeedChanged));
 
         public static readonly DependencyProperty PathProperty = DependencyProperty.Register("Path", typeof(object), typeof(AnimationPathControl), new PropertyMetadata(null, PathChanged));
 
+       
 
 
         private Canvas contentGrid;
@@ -90,7 +93,7 @@ namespace AnimationPathWpf
             PathChanges
                 .Throttle(TimeSpan.FromSeconds(1))
                 .ObserveOnDispatcher()
-                .CombineLatest(DiameterChanges.StartWith(10), SpeedChanges.StartWith(10), (p, dia, speed) =>
+                .CombineLatest(DiameterChanges.StartWith(diameter), SpeedChanges.StartWith(speed), (p, dia, speed) =>
                {
                    Point start;
                    Point end;

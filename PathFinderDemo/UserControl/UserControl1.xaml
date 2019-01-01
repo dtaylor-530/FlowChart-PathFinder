@@ -22,48 +22,53 @@
         <!--<local:Panel DockPanel.Dock="Left" DataContext="{Binding ElementName=PathPolyLine}"></local:Panel>-->
 
         <StackPanel DockPanel.Dock="Left">
-            <wpfautogrid:AutoGrid RowCount="3" RowHeight="35" Columns="100,auto" DataContext="{Binding ElementName=Range}">
-                <Label Content="diameter"/>
-                <pt:SpinControl Value="{Binding Diameter}"  Height="20"  Width="60" Margin="5" Minimum="0" Maximum="100" SmallChange="1" LargeChange="10">
-                    <TextBox Text="{Binding Diameter}" BorderThickness="0" HorizontalContentAlignment="Center"/>
-                </pt:SpinControl>
-                <Label Content="speed"/>
-                <pt:SpinControl Value="{Binding Speed}"  Height="20"  Width="60" Margin="5" Minimum="0" Maximum="100" SmallChange="1" LargeChange="10">
-                    <TextBox Text="{Binding Speed}" BorderThickness="0" HorizontalContentAlignment="Center"/>
-                </pt:SpinControl>
-            </wpfautogrid:AutoGrid>
-            <wpfautogrid:AutoGrid RowCount="2" RowHeight="35" Columns="100,150" DataContext="{Binding ElementName=PathPolyLine}">
-                <Label Content="angle"/>
-                <pt:SpinControl Value="{Binding Angle}"  Height="20"  Width="60" Margin="5" Minimum="0" Maximum="100" SmallChange="1" LargeChange="10">
-                    <TextBox Text="{Binding Angle}" BorderThickness="0" HorizontalContentAlignment="Center"/>
-                </pt:SpinControl>
-                <Label Content="line type"/>
-                <ComboBox   xmlns:ui="http://toniccomputing.com/patterns/ui" ItemsSource="{ui:EnumSource PathLine }" SelectedItem="{ui:EnumBinding PathLine}" />
-            </wpfautogrid:AutoGrid>
-            <wpfautogrid:AutoGrid RowCount="2" RowHeight="100" Columns="60,auto,70" DataContext="{Binding  ElementName=CustomControl1}">
-                <wpfautogrid:AutoGrid.Resources>
-                    <local:EqualsConverter x:Key="EqualsConverter"></local:EqualsConverter>
-                </wpfautogrid:AutoGrid.Resources>
-                <Label>1</Label>
-                <dwpf:PointViewer X="{Binding X1,ElementName=CustomControl1}" Y="{Binding Y1,ElementName=CustomControl1}"
+            <Expander Header="Body" IsExpanded="True" Margin="4">
+                <wpfautogrid:AutoGrid RowCount="3" RowHeight="35" Columns="100,auto" DataContext="{Binding ElementName=Range}">
+                    <Label Content="diameter"/>
+                    <pt:SpinControl Value="{Binding Diameter}"  Height="20"  Width="60" Margin="5" Minimum="0" Maximum="100" SmallChange="1" LargeChange="10">
+                        <TextBox Text="{Binding Diameter}" BorderThickness="0" HorizontalContentAlignment="Center"/>
+                    </pt:SpinControl>
+                    <Label Content="speed"/>
+                    <pt:SpinControl Value="{Binding Speed}"  Height="20"  Width="60" Margin="5" Minimum="0" Maximum="100" SmallChange="1" LargeChange="10">
+                        <TextBox Text="{Binding Speed}" BorderThickness="0" HorizontalContentAlignment="Center"/>
+                    </pt:SpinControl>
+                </wpfautogrid:AutoGrid>
+            </Expander>
+
+            <Expander Header="Connector" IsExpanded="True" Margin="4">
+                <wpfautogrid:AutoGrid RowCount="2" RowHeight="35" Columns="100,150" DataContext="{Binding ElementName=PathPolyLine}">
+                    <Label Content="angle"/>
+                    <pt:SpinControl Value="{Binding Angle}"  Height="20"  Width="60" Margin="5" Minimum="0" Maximum="100" SmallChange="1" LargeChange="10">
+                        <TextBox Text="{Binding Angle}" BorderThickness="0" HorizontalContentAlignment="Center"/>
+                    </pt:SpinControl>
+                    <Label Content="line type"/>
+                    <ComboBox   xmlns:ui="http://toniccomputing.com/patterns/ui" ItemsSource="{ui:EnumSource PathLine }" SelectedItem="{ui:EnumBinding PathLine}" />
+                </wpfautogrid:AutoGrid>
+            </Expander>
+            
+            <Expander Header="Nodes" IsExpanded="True" Margin="4">
+                <wpfautogrid:AutoGrid RowCount="2" RowHeight="100" Columns="60,auto,70" DataContext="{Binding  ElementName=CustomControl1}">
+                    <wpfautogrid:AutoGrid.Resources>
+                        <local:EqualsConverter x:Key="EqualsConverter"></local:EqualsConverter>
+                    </wpfautogrid:AutoGrid.Resources>
+                    <Label>1</Label>
+                    <dwpf:PointViewer X="{Binding X1,ElementName=CustomControl1}" Y="{Binding Y1,ElementName=CustomControl1}"
                                   IsSelected="{Binding ElementName=CustomControl1, Path=SelectedObject.Content,Converter={StaticResource EqualsConverter},ConverterParameter='VertexOne'}">
-                </dwpf:PointViewer>
-                <pt:RadioButtonList x:Name="One" EnumType="{x:Type geo:Side}" />
-                <Label>2</Label>
-                <dwpf:PointViewer X="{Binding X2,ElementName=CustomControl1}" Y="{Binding Y2,ElementName=CustomControl1}"
+                    </dwpf:PointViewer>
+                    <pt:RadioButtonList x:Name="One" EnumType="{x:Type geo:Side}"   Value="{x:Static geo:Side.Right}" />
+                    <Label>2</Label>
+                    <dwpf:PointViewer X="{Binding X2,ElementName=CustomControl1}" Y="{Binding Y2,ElementName=CustomControl1}"
                                   IsSelected="{Binding ElementName=CustomControl1, Path=SelectedObject.Content,Converter={StaticResource EqualsConverter},ConverterParameter='VertexTwo'}">
-                </dwpf:PointViewer>
-                <pt:RadioButtonList x:Name="Two"  EnumType="{x:Type geo:Side}"></pt:RadioButtonList>
-            </wpfautogrid:AutoGrid>
+                    </dwpf:PointViewer>
+                    <pt:RadioButtonList x:Name="Two"  EnumType="{x:Type geo:Side}" Value="{x:Static geo:Side.Top}"></pt:RadioButtonList>
+                </wpfautogrid:AutoGrid>
+            </Expander>
         </StackPanel>
+
+
         <Canvas >
-
-
             <path:AnimationPathControl x:Name="Range" Path="{Binding ElementName=PathPolyLine,Path=ConnectionPoints,Converter={StaticResource converter}}"/>
-
-
             <dwpf:CustomControl1 Name="CustomControl1" ></dwpf:CustomControl1>
-
             <pfl:PathPolyLine Name="PathPolyLine" >
                 <pfl:PathPolyLine.StartPoint>
                     <MultiBinding Converter="{StaticResource PointToConnectionPoint}">

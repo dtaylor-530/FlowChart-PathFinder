@@ -15,7 +15,7 @@ namespace PathFinderLibrary
     [TemplatePart(Name = "PolyLine", Type = typeof(Polyline))]
     public class PathPolyLine : Control, IObserver<double>
     {
-
+        private static PathLine pathLine = PathLine.Straight;
         public static readonly DependencyProperty StartPointProperty = DependencyProperty.Register("StartPoint", typeof(object), typeof(PathPolyLine), new PropertyMetadata(null, (d, e) => (d as PathPolyLine).UpdateConnectionPoints0()));
 
         public static readonly DependencyProperty EndPointProperty = DependencyProperty.Register("EndPoint", typeof(object), typeof(PathPolyLine), new PropertyMetadata(null, (d, e) => (d as PathPolyLine).UpdateConnectionPoints0()));
@@ -30,7 +30,7 @@ namespace PathFinderLibrary
 
         Subject<double> AngleChanges = new Subject<double>();
 
-        private static PathLine pathLine = PathLine.Straight;
+
         ConnectionPointToLineConverter converter = new ConnectionPointToLineConverter();
 
         public PathLine PathLine

@@ -14,13 +14,15 @@
             <local:UserControl1></local:UserControl1>
         </TabItem>
 
+        
         <TabItem Header="Nodes">
             <local:UserControl2></local:UserControl2>
         </TabItem>
 
-        <TabItem Header="Message Routing">
+       
+        <!--<TabItem Header="Message Routing">
             <local:UserControl3></local:UserControl3>
-        </TabItem>
+        </TabItem>-->
     </TabControl>
  
 
