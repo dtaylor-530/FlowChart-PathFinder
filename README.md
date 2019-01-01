@@ -1,6 +1,6 @@
 # PathFinder
 
-// new (branch:two)
+## new (branch:two)
 wpf project: demonstrates different line/ animation options for connecting two nodes.
 
 todo: 
@@ -9,7 +9,7 @@ add a viewmodel
 
 ![alt text](https://github.com/dtaylor-530/PathFinder/blob/two/010119Snapshot.png "Snapshot of program")
 
-// original (branch:master)
+## original (branch:master)
 Wpf project that displays two nodes and the path that connects them via
 an orthogonal line (i.e one that is composed of at least two segments at a right angle).
 
