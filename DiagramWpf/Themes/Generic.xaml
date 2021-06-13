@@ -1,9 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:DiagramWpf"
-    xmlns:extbehaviour="clr-namespace:WPFExtensions.AttachedBehaviours"
-    xmlns:pathfinder="clr-namespace:PathFinderLibrary;assembly=PathFinderLibrary">
+    xmlns:local="clr-namespace:DiagramWpf">
 
     <Style x:Key="TextBlockStyle" TargetType="TextBlock">
         <Setter Property="Background" Value="WhiteSmoke" />
@@ -37,7 +35,7 @@
     </Style>
 
   
-    <Label x:Key="VertexOne" 
+    <!--<Label x:Key="VertexOne" 
                            Content="VertexOne"
                            extbehaviour:DragBehaviour.IsDragEnabled="True"
                            extbehaviour:DragBehaviour.X="{Binding RelativeSource={RelativeSource Self},Path=(Canvas.Left)}"
@@ -55,7 +53,7 @@
                            Background="AliceBlue"
                            Canvas.Left="300"
                            Canvas.Top="100">
-    </Label>
+    </Label>-->
 
 
 </ResourceDictionary>

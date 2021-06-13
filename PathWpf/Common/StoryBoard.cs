@@ -13,13 +13,8 @@ namespace AnimationPathWpf
 {
     public static class StoryBoard
     {
-        public static void AddPointToStoryboard(Grid runPoint, Ellipse toEll, Storyboard sb, PathGeometry particle,
-            double l, Point startPoint, Point endPoint, double pointTime)
+        public static IEnumerable<Timeline> CreateParticleAnimation(Grid runPoint,  Geometry particle, double pointTime)           
         {
-            //double pointTime = l / m_Speed;//点运动所需的时间
-            double particleTime = pointTime / 2;//轨迹呈现所需时间(跑的比点快两倍)
-
-            #region 运动的点
             TransformGroup tfg = new TransformGroup();
             MatrixTransform mtf = new MatrixTransform();
             tfg.Children.Add(mtf);
@@ -38,46 +33,42 @@ namespace AnimationPathWpf
             };
             Storyboard.SetTarget(maup, runPoint);
             Storyboard.SetTargetProperty(maup, new PropertyPath("(Grid.RenderTransform).Children[0].(MatrixTransform.Matrix)"));
-            sb.Children.Add(maup);
-            #endregion
+            yield return maup;
 
-            #region 达到城市的圆
-            //轨迹到达圆时 圆呈现
+
+
+
+            //var eda = Animation2(particleTime);
+            //Storyboard.SetTarget(eda, toEll);
+            //Storyboard.SetTargetProperty(eda, new PropertyPath("(Ellipse.OpacityMask).(GradientBrush.GradientStops)[1].(GradientStop.Offset)"));
+            //sb.Children.Add(eda);
+        }
+
+        public static IEnumerable<Timeline> CreateTargetAnimation(Ellipse toEll, double pointTime)
+        {
+
+            double particleTime = pointTime / 2d;
+
             var ellda = Animation1(particleTime);
             Storyboard.SetTarget(ellda, toEll);
             Storyboard.SetTargetProperty(ellda, new PropertyPath(Ellipse.OpacityProperty));
-            sb.Children.Add(ellda);
+            yield return ellda;
 
+            var ca = ColorAnimation(pointTime);
+            Storyboard.SetTarget(ca, toEll);
+            Storyboard.SetTargetProperty(ca, new PropertyPath("(Ellipse.OpacityMask).(GradientBrush.GradientStops)[1].(GradientStop.Color)"));
+            yield return ca;
 
-
-            //圆呈放射状
             RadialGradientBrush rgBrush = new RadialGradientBrush();
             GradientStop gStop0 = new GradientStop(Color.FromArgb(255, 0, 0, 0), 0);
-            //此为控制点 color的a值设为0 off值走0-1 透明部分向外放射 初始设为255是为了初始化效果 开始不呈放射状 等跑动的点运动到城市的圆后 color的a值才设为0开始呈现放射动画
             GradientStop gStopT = new GradientStop(Color.FromArgb(255, 0, 0, 0), 0);
             GradientStop gStop1 = new GradientStop(Color.FromArgb(255, 0, 0, 0), 1);
             rgBrush.GradientStops.Add(gStop0);
             rgBrush.GradientStops.Add(gStopT);
             rgBrush.GradientStops.Add(gStop1);
             toEll.OpacityMask = rgBrush;
-
-
-            //跑动的点达到城市的圆时 控制点由不透明变为透明 color的a值设为0 动画时间为0
-            var ca = ColorAnimation(pointTime);
-            Storyboard.SetTarget(ca, toEll);
-            Storyboard.SetTargetProperty(ca, new PropertyPath("(Ellipse.OpacityMask).(GradientBrush.GradientStops)[1].(GradientStop.Color)"));
-            sb.Children.Add(ca);
-
-
-            var eda = Animation2(particleTime);
-            Storyboard.SetTarget(eda, toEll);
-            Storyboard.SetTargetProperty(eda, new PropertyPath("(Ellipse.OpacityMask).(GradientBrush.GradientStops)[1].(GradientStop.Offset)"));
-            sb.Children.Add(eda);
-            #endregion
-
-
-
         }
+
 
         public static LinearGradientBrush GetGradientBrush(Point startPoint, Point endPoint)
         {
@@ -104,10 +95,10 @@ namespace AnimationPathWpf
 
         public static DoubleAnimation Animation1(double particleTime) => new DoubleAnimation
         {
-            From = 0.2,//此处值设置0-1会有不同的呈现效果
+            From = 0.2,
             To = 1,
             Duration = new Duration(TimeSpan.FromSeconds(particleTime)),
-            BeginTime = TimeSpan.FromSeconds(particleTime),//推迟动画开始时间 等轨迹连接到圆时 开始播放圆的呈现动画
+            BeginTime = TimeSpan.FromSeconds(particleTime),
             FillBehavior = FillBehavior.HoldEnd
         };
 

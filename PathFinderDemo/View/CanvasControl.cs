@@ -6,11 +6,11 @@ using System.Windows.Media;
 
 namespace DiagramWpf
 {
-    public class CustomControl1 : Canvas
+    public class CanvasControl : Canvas
     {
         private Thumb VertexOne, VertexTwo;
 
-        public CustomControl1()
+        public CanvasControl()
         {
             VertexOne = new Thumb
             {
@@ -25,7 +25,7 @@ namespace DiagramWpf
                 Width = 100,        
                 Background = Brushes.AliceBlue,
             };
-     
+                   
             Children.Add(VertexOne);
             Children.Add(VertexTwo);
     
@@ -55,15 +55,15 @@ namespace DiagramWpf
 
         }
 
-        public static readonly DependencyProperty X1Property = DependencyProperty.Register("X1", typeof(double), typeof(CustomControl1), new PropertyMetadata());
+        public static readonly DependencyProperty X1Property = DependencyProperty.Register("X1", typeof(double), typeof(CanvasControl), new PropertyMetadata());
 
-        public static readonly DependencyProperty X2Property = DependencyProperty.Register("X2", typeof(double), typeof(CustomControl1), new PropertyMetadata());
+        public static readonly DependencyProperty X2Property = DependencyProperty.Register("X2", typeof(double), typeof(CanvasControl), new PropertyMetadata());
 
-        public static readonly DependencyProperty Y1Property = DependencyProperty.Register("Y1", typeof(double), typeof(CustomControl1), new PropertyMetadata());
+        public static readonly DependencyProperty Y1Property = DependencyProperty.Register("Y1", typeof(double), typeof(CanvasControl), new PropertyMetadata());
 
-        public static readonly DependencyProperty Y2Property = DependencyProperty.Register("Y2", typeof(double), typeof(CustomControl1), new PropertyMetadata());
+        public static readonly DependencyProperty Y2Property = DependencyProperty.Register("Y2", typeof(double), typeof(CanvasControl), new PropertyMetadata());
 
-        public static readonly DependencyProperty SelectedObjectProperty = DependencyProperty.Register("SelectedObject", typeof(Control), typeof(CustomControl1), new PropertyMetadata(null));
+        public static readonly DependencyProperty SelectedObjectProperty = DependencyProperty.Register("SelectedObject", typeof(Control), typeof(CanvasControl), new PropertyMetadata(null));
 
 
         public double X1
@@ -111,7 +111,6 @@ namespace DiagramWpf
                     X1 = position.X;
                 },
                 System.Windows.Threading.DispatcherPriority.Background, default);
-
             }
         }
 

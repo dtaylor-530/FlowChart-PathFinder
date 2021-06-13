@@ -31,34 +31,37 @@ namespace PathFinderLibrary
             {
                 case PathLine.Straight:
                     break;
+                case PathLine.Curved:
+                    break;
                 case PathLine.Orthogonal:
                     DetermineOrthogonalPoints(lineA, lineB, ref linkPoints);
                     break;
             }
-  
+
             linkPoints.Add(lineB.Point);
             if (angle != 0)
             {
-                List<Point> bpoints = null;
+                IEnumerable<Point> bpoints = null;
                 switch (PathLine)
                 {
                     case PathLine.Straight:
-                       double radius = DetermineArcRadius(lineA.Point,lineB.Point,angle);
-                        bpoints=GetArcGeometry(lineA.Point, lineB.Point, radius).ToPointsList();
+                        break;
+                    case PathLine.Curved:
+                        double radius = DetermineArcRadius(lineA.Point, lineB.Point, angle);
+                        bpoints = GetArcGeometry(lineA.Point, lineB.Point, radius).ToPointsList();
+                        linkPoints.Clear();
                         break;
                     case PathLine.Orthogonal:
-                        bpoints = GetBezierGeometry(linkPoints).ToPointsList(); 
+                        bpoints = GetBezierGeometry(linkPoints).ToPointsList();
+                        linkPoints.Clear();
                         break;
                 }
-                linkPoints.Clear();
-                foreach (var point in bpoints)
-                    linkPoints.Add(point);
+                if (bpoints != null)
+                    foreach (var point in bpoints)
+                        linkPoints.Add(point);
             }
             return linkPoints;
         }
-
-
-
 
 
         private static void DetermineOrthogonalPoints(Line lineA, Line lineB, ref List<Point> linkPoints)
@@ -199,8 +202,8 @@ namespace PathFinderLibrary
 
             BezierSegment segment = null;
 
-            if(points.Count==3)
- 
+            if (points.Count == 3)
+
                 segment = new BezierSegment
                 {
                     Point1 = points[1],
@@ -225,7 +228,7 @@ namespace PathFinderLibrary
 
             return new PathGeometry { Figures = myPathFigureCollection };
 
-         
+
         }
 
 
@@ -234,10 +237,10 @@ namespace PathFinderLibrary
 
 
 
-        public static PathGeometry GetArcGeometry(Point start, Point end, double r)=>
+        public static PathGeometry GetArcGeometry(Point start, Point end, double r) =>
          new PathGeometry
-            {
-                Figures = new PathFigureCollection
+         {
+             Figures = new PathFigureCollection
                  (
                      new[]
                      {
@@ -257,7 +260,7 @@ namespace PathFinderLibrary
                      }
                      )
 
-            };
+         };
 
         public static double DetermineArcRadius(Point start, Point end, double angle)
         {
@@ -267,7 +270,7 @@ namespace PathFinderLibrary
             double y = start.Y - end.Y;
             double aa = x * x + y * y;
             double l = Math.Sqrt(aa);
-            return  l / (sinA * 2);
+            return l / (sinA * 2);
         }
 
 

@@ -19,7 +19,7 @@
     </DataTemplate>-->
 
 
-    <Style  TargetType="{x:Type local:PathPolyLine}">
+    <!--<Style  TargetType="{x:Type local:PathPolyLine}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:PathPolyLine}">
@@ -30,6 +30,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>-->
 
 </ResourceDictionary>

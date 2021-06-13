@@ -12,28 +12,23 @@ namespace PathFinderLibrary
 {
     public class ConnectionPointToLineConverter : IMultiValueConverter
     {
-        //public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        //{
-        //    IConnectionPoint x = value as IConnectionPoint;
-        //    return new Line
-        //    {
-        //        Vector = x.Side.ToVector(),
-        //        Point = x.Position
-        //    };
-        //}
 
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
+            return CreateLine((Vector)values[0], (Point)values[1]);
 
-            var vector = (Vector)values[0];
-            var point = (Point)values[1];
+        }
+
+
+
+        public static Line CreateLine(Vector vector, Point point)
+        {           
             return new Line
             {
                 Vector = vector,
                 Point = point
             };
         }
-
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {

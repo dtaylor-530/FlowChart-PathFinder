@@ -5,13 +5,13 @@
                     xmlns:wpfautogrid="clr-namespace:WpfAutoGrid;assembly=WpfAutoGrid">
 
 
-    <Style x:Key="AnimationPathControlStyle" TargetType="{x:Type local:AnimationPathControl}" >
+    <!--<Style x:Key="AnimationPathControlStyle" TargetType="{x:Type local:AnimationPathControl}" >
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:AnimationPathControl}">
                
 
-                        <!--<wpfautogrid:AutoGrid RowCount="3" RowHeight="35" Columns="100,auto">
+                        --><!--<wpfautogrid:AutoGrid RowCount="3" RowHeight="35" Columns="100,auto">
                             <Label Content="angle"/>
                             <pt:SpinControl Value="{Binding Angle,RelativeSource={RelativeSource TemplatedParent}}"  Height="20"  Width="60" Margin="5" Minimum="0" Maximum="100" SmallChange="1" LargeChange="10">
                                 <TextBox Text="{Binding Angle,RelativeSource={RelativeSource TemplatedParent}}" BorderThickness="0" HorizontalContentAlignment="Center"/>
@@ -25,17 +25,17 @@
                                 <TextBox Text="{Binding Speed,RelativeSource={RelativeSource TemplatedParent}}" BorderThickness="0" HorizontalContentAlignment="Center"/>
                             </pt:SpinControl>
                         </wpfautogrid:AutoGrid>-->
-                        <!--<Canvas VerticalAlignment="Stretch" HorizontalAlignment="Stretch">-->
+                        <!--<Canvas VerticalAlignment="Stretch" HorizontalAlignment="Stretch">--><!--
 
 
                          <Canvas   Name="PATH_ContentGrid">
 
                         </Canvas>
-                        <!--</Canvas>-->
+                        --><!--</Canvas>--><!--
     
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>-->
 
 </ResourceDictionary>

@@ -13,44 +13,61 @@ namespace AnimationPathWpf
 {
     public static class PathEllipse
     {
-        static Random rd = new Random();
-
-        //颜色
-
-        /// <summary>
-        /// 添加控件和动画到容器
-        /// </summary>
-        /// <param name="item">数据项</param>
-        public static DependencyObject[] GetAnimation(Point startPoint, Point endPoint, double diameter, PathGeometry geometry, double l, byte[] rgb, Storyboard m_Sb, double m_Speed, string m_PointData)
+        public static IEnumerable<DependencyObject> GetAnimations(Point startPoint,
+            Point endPoint, 
+            double diameter,
+            Geometry geometry, 
+            byte[] rgb, 
+            Storyboard m_Sb, 
+            double pointTime,
+            string m_PointData, 
+            double l, 
+            Style style, 
+            bool showPathAnimation, 
+            bool showParticleAnimation, 
+            bool showTargetAnimation)
         {
-            //grid_Animation.Children.Clear();
-            //m_Sb.Children.Clear();
+            if (showPathAnimation)
+            {
+                Path path = new Path
+                {
+                    Style = style,
+                    Data = geometry,
+                    Stroke = new SolidColorBrush(Color.FromArgb(255, rgb[0], rgb[1], rgb[2])),
+                    OpacityMask = StoryBoard.GetGradientBrush(startPoint, endPoint),
+                };
+
+                foreach (var timeLine in PathEllipse.GetPathAnimation(path, startPoint, endPoint, rgb, m_Sb, geometry, l, style))
+                {
+                    m_Sb.Children.Add(timeLine);
+                }
+                yield return path;
+            }
+            if (showParticleAnimation)
+            {
+                Grid particle = GetRunPoint(rgb, m_PointData);
+
+                foreach (var timeLine in StoryBoard.CreateParticleAnimation(particle, geometry, pointTime))
+                {
+                    m_Sb.Children.Add(timeLine);
+                }
+                yield return particle;
+            }
+            if (showTargetAnimation)
+            {
+                Ellipse ell = PathEllipse.GetToEllipse(diameter, diameter, rgb, endPoint);
+                foreach (var timeLine in StoryBoard.CreateTargetAnimation(ell, pointTime))
+                {
+                    m_Sb.Children.Add(timeLine);
+                }
+                yield return ell;
+            }
 
 
-
-
-            // 跑动的点
-            System.Windows.Controls.Grid grid = GetRunPoint(rgb, m_PointData);
-            //到达城市的圆
-            Ellipse ell = PathEllipse.GetToEllipse(diameter, diameter, rgb, endPoint);
-
-            double pointTime = l / m_Speed;
-
-            StoryBoard.AddPointToStoryboard(grid, ell, m_Sb, geometry, l, startPoint, endPoint, pointTime);
-
-            return new DependencyObject[] { grid, ell };
         }
 
-
-        /// <summary>
-        /// 获取跑动的点
-        /// </summary>
-        /// <param name="rgb">颜色:r,g,b</param>
-        /// <returns>Grid</returns>
         public static Grid GetRunPoint(byte[] rgb, string m_PointData)
         {
-
-            //Grid
             Grid grid = new Grid
             {
                 IsHitTestVisible = false,//不参与命中测试
@@ -61,8 +78,21 @@ namespace AnimationPathWpf
                 RenderTransformOrigin = new Point(0.5, 0.5)
             };
 
-            //Ellipse
-            Ellipse ell = new Ellipse
+            Ellipse ell = GetEllipse(rgb);
+
+            Path path = GetPath(rgb, m_PointData);
+            grid.Children.Add(ell);
+            grid.Children.Add(path);
+
+            return grid;
+
+
+        }
+
+
+        static Ellipse GetEllipse(byte[] rgb)
+        {
+            return new Ellipse
             {
                 Width = 40,
                 Height = 15,
@@ -77,9 +107,11 @@ namespace AnimationPathWpf
                 })
                 }
             };
+        }
 
-
-            Path path = new Path
+        static Path GetPath(byte[] rgb, string m_PointData)
+        {
+            return new Path
             {
                 Data = Geometry.Parse(m_PointData),
                 Width = 30,
@@ -96,22 +128,9 @@ namespace AnimationPathWpf
                 },
                 Stretch = Stretch.Fill
             };
-
-            grid.Children.Add(ell);
-            grid.Children.Add(path);
-
-            return grid;
         }
 
 
-
-
-        /// <summary>
-        /// 获取到达城市的圆
-        /// </summary>
-        /// <param name="toItem">数据项</param>
-        /// <param name="rgb">颜色</param>
-        /// <returns>Ellipse</returns>
         public static Ellipse GetToEllipse(double width, double height, byte[] rgb, Point toPos) => new Ellipse
         {
             HorizontalAlignment = HorizontalAlignment.Left,
@@ -124,21 +143,9 @@ namespace AnimationPathWpf
 
         };
 
-
-
-
-
-        public static Path GetParticlePath(Point start, Point end, byte[] rgb, Storyboard sb, PathGeometry geometry, double l)
+        public static IEnumerable<Timeline> GetPathAnimation(Path path, Point start, Point end, byte[] rgb, Storyboard sb, Geometry geometry, double l, Style style)
         {
-
-            Path path = new Path
-            {
-                Style = (Style)Application.Current.Resources["ParticlePathStyle"],
-                Data = geometry,
-                Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(255, rgb[0], rgb[1], rgb[2])),
-                OpacityMask = StoryBoard.GetGradientBrush(start, end),
-
-            };
+    
 
             //path.ToolTip = string.Format("{0}=>{1}",mapitem.ToString(), toItem.To.ToString());
 
@@ -146,34 +153,22 @@ namespace AnimationPathWpf
 
             DoubleAnimation pda0 = StoryBoard.Animation3(particleTime);
 
-
-            //Path particlePath = PathEllipse.GetParticlePath(startPoint, endPoint, rgb, m_angle, out double l);
-            //particlePath.
-
             Storyboard.SetTarget(pda0, path);
             Storyboard.SetTargetProperty(pda0, new PropertyPath("(Path.OpacityMask).(GradientBrush.GradientStops)[0].(GradientStop.Offset)"));
-            sb.Children.Add(pda0);
+            yield return (pda0);
 
 
 
             var pda1 = StoryBoard.Animation3(particleTime);
             Storyboard.SetTarget(pda1, path);
             Storyboard.SetTargetProperty(pda1, new PropertyPath("(Path.OpacityMask).(GradientBrush.GradientStops)[1].(GradientStop.Offset)"));
-            sb.Children.Add(pda1);
+           yield return (pda1);
 
 
-            return path;
+  
         }
 
 
-        /// <summary>
-        /// 获取运动轨迹
-        /// </summary>
-        /// <param name="from">来自</param>
-        /// <param name="toItem">去</param>
-        /// <param name="rgb">颜色:r,g,b</param>
-        /// <param name="l">两点间的直线距离</param>
-        /// <returns>Path</returns>
         public static PathGeometry GetParticlePathGeometry(Point start, Point end, double m_Angle)
         {
 
