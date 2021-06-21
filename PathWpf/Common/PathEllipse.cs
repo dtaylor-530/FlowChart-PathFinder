@@ -13,7 +13,8 @@ namespace AnimationPathWpf
 {
     public static class PathEllipse
     {
-        public static IEnumerable<DependencyObject> GetAnimations(Point startPoint,
+        public static IEnumerable<DependencyObject> GetAnimations(
+            Point startPoint,
             Point endPoint, 
             double diameter,
             Geometry geometry, 

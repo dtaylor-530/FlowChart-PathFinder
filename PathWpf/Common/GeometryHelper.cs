@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
-
 namespace AnimationPathWpf
 {
-
-
-
     public static class GeometryHelper
     {
         public static double GetLength(this Geometry geo)
@@ -34,14 +30,30 @@ namespace AnimationPathWpf
                         }
                     else if (seg is LineSegment)
                     {
-                        var point=(seg as LineSegment).Point;
+                        var point = (seg as LineSegment).Point;
                         length += Distance(start, point);
                         start = point;
-                    }  
+                    }
                 }
             }
 
             return length;
+        }
+
+        public static Point GetEndPoint(this Geometry geo)
+        {
+            PathGeometry path = geo.GetFlattenedPathGeometry();
+
+            var seg = path.Figures.Last().Segments.Last();
+            switch (seg)
+            {
+                case PolyLineSegment _:
+                    return (seg as PolyLineSegment).Points.Last();
+                case LineSegment _:
+                    return (seg as LineSegment).Point;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private static double Distance(Point p1, Point p2)

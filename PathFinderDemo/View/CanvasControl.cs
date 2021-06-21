@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
@@ -6,7 +7,7 @@ using System.Windows.Media;
 
 namespace DiagramWpf
 {
-    public class CanvasControl : Canvas
+    public class CanvasControl : Canvas, INotifyPropertyChanged
     {
         private Thumb VertexOne, VertexTwo;
 
@@ -65,6 +66,7 @@ namespace DiagramWpf
 
         public static readonly DependencyProperty SelectedObjectProperty = DependencyProperty.Register("SelectedObject", typeof(Control), typeof(CanvasControl), new PropertyMetadata(null));
 
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public double X1
         {
@@ -98,10 +100,16 @@ namespace DiagramWpf
             set { SetValue(SelectedObjectProperty, value); }
         }
 
+        public bool IsFirstSelected => SelectedObject == VertexOne;
+        public bool IsSecondSelected => SelectedObject == VertexTwo;
+
 
         private void VertexOne_MouseMove(object sender, MouseEventArgs e)
         {
             SelectedObject = (sender as Control);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsFirstSelected)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsSecondSelected)));
+
             var position = e.GetPosition(this);
             if (e.LeftButton == MouseButtonState.Pressed)
             {
@@ -117,6 +125,8 @@ namespace DiagramWpf
         private void VertexTwo_MouseMove(object sender, MouseEventArgs e)
         {
             SelectedObject = (sender as Control);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsFirstSelected)));           
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsSecondSelected)));
             var position = e.GetPosition(this);
             if (e.LeftButton == MouseButtonState.Pressed)
             {

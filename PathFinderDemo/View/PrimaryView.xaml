@@ -60,12 +60,12 @@
                     </wpfautogrid:AutoGrid.Resources>
                     <Label>1</Label>
                     <dwpf:PointViewer X="{Binding X1,ElementName=CustomControl1}" Y="{Binding Y1,ElementName=CustomControl1}"
-                                  IsSelected="{Binding ElementName=CustomControl1, Path=SelectedObject.Content,Converter={StaticResource EqualsConverter},ConverterParameter='VertexOne'}">
+                                  IsSelected="{Binding ElementName=CustomControl1, Path=IsFirstSelected}">
                     </dwpf:PointViewer>
                     <pt:RadioButtonList x:Name="One" EnumType="{x:Type geo:Side}"   Value="{x:Static geo:Side.Right}" />
                     <Label>2</Label>
                     <dwpf:PointViewer X="{Binding X2,ElementName=CustomControl1}" Y="{Binding Y2,ElementName=CustomControl1}"
-                                  IsSelected="{Binding ElementName=CustomControl1, Path=SelectedObject.Content,Converter={StaticResource EqualsConverter},ConverterParameter='VertexTwo'}">
+                                  IsSelected="{Binding ElementName=CustomControl1, Path=IsSecondSelected}">
                     </dwpf:PointViewer>
                     <pt:RadioButtonList x:Name="Two"  EnumType="{x:Type geo:Side}" Value="{x:Static geo:Side.Top}"></pt:RadioButtonList>
                 </wpfautogrid:AutoGrid>
@@ -76,27 +76,6 @@
         <UniformGrid>
 
 
-
-            <Canvas>
-                <dwpf1:CanvasControl x:Name="CustomControl2" ></dwpf1:CanvasControl>
-
-                <pfl:PathPolyLine Name="PathPolyLine2" >
-                    <pfl:PathPolyLine.StartPoint>
-                        <MultiBinding Converter="{StaticResource PointToConnectionPoint}">
-                            <Binding Path="X1" ElementName="CustomControl2"/>
-                            <Binding Path="Y1" ElementName="CustomControl2"/>
-                            <Binding Path="Value" ElementName="One"/>
-                        </MultiBinding>
-                    </pfl:PathPolyLine.StartPoint>
-                    <pfl:PathPolyLine.EndPoint>
-                        <MultiBinding Converter="{StaticResource PointToConnectionPoint}">
-                            <Binding Path="X2" ElementName="CustomControl2"/>
-                            <Binding Path="Y2" ElementName="CustomControl2"/>
-                            <Binding Path="Value" ElementName="Two"/>
-                        </MultiBinding>
-                    </pfl:PathPolyLine.EndPoint>
-                </pfl:PathPolyLine>
-            </Canvas>
 
 
 
@@ -118,7 +97,7 @@
                     </pfl:PathPolyLine.EndPoint>
                 </pfl:PathPolyLine>
                 
-                <path:AnimationPathControl x:Name="Range1" 
+                <path:AnimationPathControl x:Name="Range" 
                                                 ShowPath="{Binding ElementName=CheckBox1, Path=IsChecked}"
                                            ShowParticle="{Binding ElementName=CheckBox2, Path=IsChecked}"
                                            ShowTarget="{Binding ElementName=CheckBox3, Path=IsChecked}"
@@ -159,12 +138,13 @@
                                                   Converter={StaticResource PointToGeometryConverter}}"/>
 
                 <dwpf1:CanvasControl x:Name="CustomControl21" ></dwpf1:CanvasControl>
-
-
             </Canvas>
 
             <Canvas>
-                <path:AnimationPathControl x:Name="Range" >
+                <path:AnimationPathControl x:Name="Range1" 
+                                               ShowPath="{Binding ElementName=CheckBox1, Path=IsChecked}"
+                                           ShowParticle="{Binding ElementName=CheckBox2, Path=IsChecked}"
+                                           ShowTarget="{Binding ElementName=CheckBox3, Path=IsChecked}">
                     <path:AnimationPathControl>
                         <path:AnimationPathControl.Path>
                             <MultiBinding Converter="{StaticResource DoublesToPathGeometryConverter}">
@@ -178,6 +158,28 @@
                 </path:AnimationPathControl>
 
                 <dwpf1:CanvasControl x:Name="CustomControl3" ></dwpf1:CanvasControl>
+            </Canvas>
+
+
+            <Canvas>
+                <dwpf1:CanvasControl x:Name="CustomControl2" ></dwpf1:CanvasControl>
+
+                <pfl:PathPolyLine Name="PathPolyLine2" >
+                    <pfl:PathPolyLine.StartPoint>
+                        <MultiBinding Converter="{StaticResource PointToConnectionPoint}">
+                            <Binding Path="X1" ElementName="CustomControl2"/>
+                            <Binding Path="Y1" ElementName="CustomControl2"/>
+                            <Binding Path="Value" ElementName="One"/>
+                        </MultiBinding>
+                    </pfl:PathPolyLine.StartPoint>
+                    <pfl:PathPolyLine.EndPoint>
+                        <MultiBinding Converter="{StaticResource PointToConnectionPoint}">
+                            <Binding Path="X2" ElementName="CustomControl2"/>
+                            <Binding Path="Y2" ElementName="CustomControl2"/>
+                            <Binding Path="Value" ElementName="Two"/>
+                        </MultiBinding>
+                    </pfl:PathPolyLine.EndPoint>
+                </pfl:PathPolyLine>
             </Canvas>
 
 
