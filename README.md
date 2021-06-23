@@ -1,11 +1,8 @@
 # PathFinder
 
 ## new (branch:two)
-wpf project: demonstrates different line/ animation options for connecting two nodes.
-
-todo: 
-adjust target circle to match target node
-add a viewmodel
+wpf project: demonstrates different line-types (curve/orthoganal/straight) and animation options for connecting two nodes via a Path.
+animations based on https://github.com/ptddqr/wpf-echarts-map
 
 ![alt text](https://github.com/dtaylor-530/PathFinder/blob/two/010119Snapshot.png "Snapshot of program")
 
