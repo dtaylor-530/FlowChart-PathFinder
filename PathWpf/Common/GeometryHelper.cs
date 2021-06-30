@@ -22,15 +22,15 @@ namespace AnimationPathWpf
 
                 foreach (PathSegment seg in pf.Segments)
                 {
-                    if (seg is PolyLineSegment)
-                        foreach (Point point in (seg as PolyLineSegment).Points)
+                    if (seg is PolyLineSegment pls)
+                        foreach (Point point in pls.Points)
                         {
                             length += Distance(start, point);
                             start = point;
                         }
-                    else if (seg is LineSegment)
+                    else if (seg is LineSegment ls)
                     {
-                        var point = (seg as LineSegment).Point;
+                        var point = ls.Point;
                         length += Distance(start, point);
                         start = point;
                     }
@@ -47,10 +47,10 @@ namespace AnimationPathWpf
             var seg = path.Figures.Last().Segments.Last();
             switch (seg)
             {
-                case PolyLineSegment _:
-                    return (seg as PolyLineSegment).Points.Last();
-                case LineSegment _:
-                    return (seg as LineSegment).Point;
+                case PolyLineSegment pls:
+                    return pls.Points.Last();
+                case LineSegment ls:
+                    return ls.Point;
                 default:
                     throw new ArgumentOutOfRangeException();
             }

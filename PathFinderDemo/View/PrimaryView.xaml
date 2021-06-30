@@ -5,22 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PathFinderDemo"
              xmlns:dwpf="clr-namespace:DiagramWpf;assembly=DiagramWpf"
-             xmlns:pfl="clr-namespace:PathFinderLibrary;assembly=PathFinderLibrary"
-             
-                 xmlns:path="clr-namespace:AnimationPathWpf;assembly=AnimationPathWpf"
-                  xmlns:wpfautogrid="clr-namespace:WpfAutoGrid;assembly=WpfAutoGrid"
+             xmlns:pfl="clr-namespace:PathFinderLibrary;assembly=PathFinderLibrary" 
+             xmlns:path="clr-namespace:AnimationPathWpf;assembly=AnimationPathWpf"
+             xmlns:wpfautogrid="clr-namespace:WpfAutoGrid;assembly=WpfAutoGrid"
              xmlns:pt="http://propertytools.org/wpf"
-             xmlns:geo="clr-namespace:GeometryLibrary;assembly=GeometryLibrary" xmlns:dwpf1="clr-namespace:DiagramWpf"
+             xmlns:geo="clr-namespace:GeometryLibrary;assembly=GeometryLibrary" 
+             xmlns:dwpf1="clr-namespace:DiagramWpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel >
         <DockPanel.Resources>
-            <!--<local:ToRangeConverter x:Key="ToRangeConverter"></local:ToRangeConverter>-->
             <path:PointsToPathGeometryConverter x:Key="PointToGeometryConverter"></path:PointsToPathGeometryConverter>
             <path:DoublesToPathGeometryConverter x:Key="DoublesToPathGeometryConverter"></path:DoublesToPathGeometryConverter>
         </DockPanel.Resources>
 
-        <!--<local:Panel DockPanel.Dock="Left" DataContext="{Binding ElementName=PathPolyLine}"></local:Panel>-->
 
         <StackPanel DockPanel.Dock="Left">
             <Expander Header="Body" IsExpanded="True" Margin="4">
@@ -74,11 +72,6 @@
 
 
         <UniformGrid>
-
-
-
-
-
             <Canvas>
                 <pfl:PathPolyLine Name="PathPolyLine" >
                     <pfl:PathPolyLine.StartPoint>
@@ -182,8 +175,6 @@
                 </pfl:PathPolyLine>
             </Canvas>
 
-
         </UniformGrid>
-
     </DockPanel>
 </UserControl>
