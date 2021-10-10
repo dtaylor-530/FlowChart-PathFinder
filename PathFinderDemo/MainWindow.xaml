@@ -3,27 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PathFinderDemo" 
-        xmlns:dwpf="clr-namespace:DiagramWpf;assembly=DiagramWpf"
-        
+        xmlns:local="clr-namespace:PathFinderDemo"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800">
 
     <TabControl>
         <TabItem Header="PathFinder">
-            <local:UserControl1></local:UserControl1>
+            <local:ConnectorsView></local:ConnectorsView>
         </TabItem>
 
-        
         <TabItem Header="Nodes">
-            <local:UserControl2></local:UserControl2>
+            <local:NodesView></local:NodesView>
         </TabItem>
 
-       
-        <!--<TabItem Header="Message Routing">
-            <local:UserControl3></local:UserControl3>
-        </TabItem>-->
     </TabControl>
- 
 
 </Window>

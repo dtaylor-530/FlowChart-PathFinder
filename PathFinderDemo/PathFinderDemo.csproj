@@ -113,15 +113,12 @@
     <Compile Include="Converter\EqualsConverter.cs" />
     <Compile Include="Converter\PointToConnectionPointConverter.cs" />
     <Compile Include="Converter\ToRangeConverter.cs" />
-    <Compile Include="View\CanvasControl.cs" />
-    <Compile Include="View\PrimaryView.xaml.cs">
-      <DependentUpon>PrimaryView.xaml</DependentUpon>
+    <Compile Include="Controls\CanvasControl.cs" />
+    <Compile Include="View\ConnectorsView.xaml.cs">
+      <DependentUpon>ConnectorsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DetailsView.xaml.cs">
-      <DependentUpon>DetailsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\SecondaryView.xaml.cs">
-      <DependentUpon>SecondaryView.xaml</DependentUpon>
+    <Compile Include="View\NodesView.xaml.cs">
+      <DependentUpon>NodesView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -135,15 +132,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\PrimaryView.xaml">
+    <Page Include="View\ConnectorsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DetailsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\SecondaryView.xaml">
+    <Page Include="View\NodesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -210,9 +203,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

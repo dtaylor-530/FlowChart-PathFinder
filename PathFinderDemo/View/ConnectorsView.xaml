@@ -1,17 +1,17 @@
-﻿<UserControl x:Class="PathFinderDemo.UserControl1"
+﻿<UserControl x:Class="PathFinderDemo.ConnectorsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:PathFinderDemo"
              xmlns:dwpf="clr-namespace:DiagramWpf;assembly=DiagramWpf"
-             xmlns:pfl="clr-namespace:PathFinderLibrary;assembly=PathFinderLibrary" 
+             xmlns:pfl="clr-namespace:PathFinderLibrary;assembly=PathFinderLibrary"
              xmlns:path="clr-namespace:AnimationPathWpf;assembly=AnimationPathWpf"
              xmlns:wpfautogrid="clr-namespace:WpfAutoGrid;assembly=WpfAutoGrid"
              xmlns:pt="http://propertytools.org/wpf"
-             xmlns:geo="clr-namespace:GeometryLibrary;assembly=GeometryLibrary" 
+             xmlns:geo="clr-namespace:GeometryLibrary;assembly=GeometryLibrary"
              xmlns:dwpf1="clr-namespace:DiagramWpf"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel >
         <DockPanel.Resources>
@@ -89,20 +89,17 @@
                         </MultiBinding>
                     </pfl:PathPolyLine.EndPoint>
                 </pfl:PathPolyLine>
-                
-                <path:AnimationPathControl x:Name="Range" 
-                                                ShowPath="{Binding ElementName=CheckBox1, Path=IsChecked}"
+
+                <path:AnimationPathControl x:Name="Range"
+                                           ShowPath="{Binding ElementName=CheckBox1, Path=IsChecked}"
                                            ShowParticle="{Binding ElementName=CheckBox2, Path=IsChecked}"
                                            ShowTarget="{Binding ElementName=CheckBox3, Path=IsChecked}"
-                                       Path="{Binding ElementName=PathPolyLine, 
+                                           Path="{Binding ElementName=PathPolyLine,
                                                   Path=ConnectionPoints,
                                                   Converter={StaticResource PointToGeometryConverter}}"/>
 
                 <dwpf1:CanvasControl x:Name="CustomControl1" ></dwpf1:CanvasControl>
-
-
             </Canvas>
-
 
             <Canvas>
                 <pfl:PathPolyLine Name="PathPolyLine22" >
@@ -122,11 +119,11 @@
                     </pfl:PathPolyLine.EndPoint>
                 </pfl:PathPolyLine>
 
-                <path:AnimationPathControl x:Name="Range21" 
+                <path:AnimationPathControl x:Name="Range21"
                                                 ShowPath="{Binding ElementName=CheckBox1, Path=IsChecked}"
                                            ShowParticle="{Binding ElementName=CheckBox2, Path=IsChecked}"
                                            ShowTarget="{Binding ElementName=CheckBox3, Path=IsChecked}"
-                                       Path="{Binding ElementName=PathPolyLine22, 
+                                       Path="{Binding ElementName=PathPolyLine22,
                                                   Path=ConnectionPoints,
                                                   Converter={StaticResource PointToGeometryConverter}}"/>
 
@@ -134,7 +131,7 @@
             </Canvas>
 
             <Canvas>
-                <path:AnimationPathControl x:Name="Range1" 
+                <path:AnimationPathControl x:Name="Range1"
                                                ShowPath="{Binding ElementName=CheckBox1, Path=IsChecked}"
                                            ShowParticle="{Binding ElementName=CheckBox2, Path=IsChecked}"
                                            ShowTarget="{Binding ElementName=CheckBox3, Path=IsChecked}">

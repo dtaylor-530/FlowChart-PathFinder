@@ -22,14 +22,14 @@ namespace DiagramWpf
 
             VertexTwo = new Thumb
             {
-                Height =30,
-                Width = 100,        
+                Height = 30,
+                Width = 100,
                 Background = Brushes.AliceBlue,
             };
-                   
+
             Children.Add(VertexOne);
             Children.Add(VertexTwo);
-    
+
             VertexOne.DragDelta += Vertex_DragDelta;
             VertexTwo.DragDelta += Vertex_DragDelta;
 
@@ -49,10 +49,10 @@ namespace DiagramWpf
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-           Canvas.SetTop(VertexOne,  Y1 = 300);
-           Canvas.SetLeft(VertexOne,  X1 = 300);
-           Canvas.SetTop(VertexTwo,  Y2 = 100);
-           Canvas.SetLeft(VertexTwo,  X2 = 100);
+            Canvas.SetTop(VertexOne, Y1 = 300);
+            Canvas.SetLeft(VertexOne, X1 = 300);
+            Canvas.SetTop(VertexTwo, Y2 = 100);
+            Canvas.SetLeft(VertexTwo, X2 = 100);
 
         }
 
@@ -80,7 +80,6 @@ namespace DiagramWpf
             set { SetValue(X2Property, value); }
         }
 
-
         public double Y1
         {
             get { return (double)GetValue(Y1Property); }
@@ -93,7 +92,6 @@ namespace DiagramWpf
             set { SetValue(Y2Property, value); }
         }
 
-
         public Control SelectedObject
         {
             get { return (Control)GetValue(SelectedObjectProperty); }
@@ -102,7 +100,6 @@ namespace DiagramWpf
 
         public bool IsFirstSelected => SelectedObject == VertexOne;
         public bool IsSecondSelected => SelectedObject == VertexTwo;
-
 
         private void VertexOne_MouseMove(object sender, MouseEventArgs e)
         {
@@ -125,19 +122,18 @@ namespace DiagramWpf
         private void VertexTwo_MouseMove(object sender, MouseEventArgs e)
         {
             SelectedObject = (sender as Control);
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsFirstSelected)));           
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsFirstSelected)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsSecondSelected)));
             var position = e.GetPosition(this);
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 this.Dispatcher.InvokeAsync(() =>
                 {
-                    Y2 = position.Y; 
+                    Y2 = position.Y;
                     X2 = position.X;
                 }, System.Windows.Threading.DispatcherPriority.Background, default);
             }
         }
-
 
         private void OnMouseUp(object sender, MouseButtonEventArgs e)
         {
@@ -152,7 +148,6 @@ namespace DiagramWpf
         private void VertexOne_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonDown(e);
-      
         }
     }
 }
