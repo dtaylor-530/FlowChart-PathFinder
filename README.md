@@ -1,33 +1,24 @@
-# PathFinder
+## Introduction
 
-## lastest 
 wpf demo/control libraries:
-Control libraries have controls for visually connecting two points.
-Demo demonstrates different line-types (curve/orthoganal/straight), animation options, etc. possible
-Animations based on work within https://github.com/ptddqr/wpf-echarts-map
 
-![](Media/bandicam 2022-01-23 12-36-40-215.mp4)
+- Controls for visually connecting two points on a Canvas.
+- different line-types (curve/orthoganal/straight), animation-options, node-positions etc. possible.
 
-## modified
+### Lastest 
+![alt text](Media/latest.gif "lastest snapshot of demo")
 
-![alt text](Media/010119Snapshot.png "Snapshot of program")
+### Modified
+<img src='Media/010119Snapshot.png' width='500'>
 
-## original
-Wpf project that displays two nodes and the path that connects them via
-an orthogonal line (i.e one that is composed of at least two segments at a right angle).
+### Original
+<img src='Media/OriginalSnapShot.png' width='500'>
 
-The orthogonal line is calculated using vector maths whose explanation is included in the code.
+## Issues:
 
-The MVVM approach is lightely used.
+- [x] fixing the position of the connection tips to the node's center or a position on the node's boundary relative to it.(23/01/2022)
+- [ ] limiting the movement of nodes to the dimensions of the canvas.
 
-This could be utlised in a flowchart-diagram based project.
-
-
-![alt text](Media/OriginalSnapShot.png "Snapshot of program")
-
-
-Issues include:
-
-~~fixing the position of the connection tips to the node's center or a position on the node's boundary relative to it.~~ (23/01/2022)
-
-limiting the movement of nodes to the dimensions of the canvas.
+## Credit
+- [animations](https://github.com/ptddqr/wpf-echarts-map) 
+- [gifs](https://github.com/NickeManarin/ScreenToGif/)
