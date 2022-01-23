@@ -1,10 +1,7 @@
 ﻿namespace System.Windows
 {
-    using Collections.Generic;
-
     public static class RectExtension
     {
-
         /// <summary>
         /// breaks rectangle into LineEquation objects starting from leftmost side and working clockwise
         /// </summary>
@@ -31,9 +28,6 @@
 
         //}
 
-
-
-
         //improved from original at http://www.codeproject.com/Tips/403031/Extension-methods-for-finding-centers-of-a-rectang
 
         /// <summary>
@@ -45,6 +39,7 @@
         {
             return new Point((float)(r.Left + (r.Width / 2D)), (float)(r.Top + (r.Height / 2D)));
         }
+
         /// <summary>
         /// Returns the center right point of the rectangle
         /// i.e. the right hand edge, centered vertically.
@@ -56,6 +51,7 @@
             return new Point((r.Right), (float)(r.Top + (r.Height / 2D)));
             //Rect r = new Rect();
         }
+
         /// <summary>
         /// Returns the center left point of the rectangle
         /// i.e. the left hand edge, centered vertically.
@@ -66,6 +62,7 @@
         {
             return new Point(r.Left, (float)(r.Top + (r.Height / 2D)));
         }
+
         /// <summary>
         /// Returns the center bottom point of the rectangle
         /// i.e. the bottom edge, centered horizontally.
@@ -76,6 +73,7 @@
         {
             return new Point((float)(r.Left + (r.Width / 2D)), r.Bottom);
         }
+
         /// <summary>
         /// Returns the center top point of the rectangle
         /// i.e. the topedge, centered horizontally.

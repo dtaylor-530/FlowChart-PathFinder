@@ -1,10 +1,7 @@
-﻿
-
-using GeometryLibrary;
+﻿using GeometryLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Media;
 
@@ -12,16 +9,10 @@ using System.Windows.Media;
 ///  Move this to a singleton pattwern
 /// </summary>
 
-
 namespace PathFinderLibrary
 {
-
-
-
     public static class PathCalculator
     {
-
-
         public static List<Point> FindPath(Line lineA, Line lineB, PathLine PathLine = PathLine.Orthogonal, double angle = 0)
         {
             List<Point> linkPoints = new List<Point>();
@@ -31,8 +22,10 @@ namespace PathFinderLibrary
             {
                 case PathLine.Straight:
                     break;
+
                 case PathLine.Curved:
                     break;
+
                 case PathLine.Orthogonal:
                     DetermineOrthogonalPoints(lineA, lineB, ref linkPoints);
                     break;
@@ -46,11 +39,13 @@ namespace PathFinderLibrary
                 {
                     case PathLine.Straight:
                         break;
+
                     case PathLine.Curved:
                         double radius = DetermineArcRadius(lineA.Point, lineB.Point, angle);
                         bpoints = GetArcGeometry(lineA.Point, lineB.Point, radius).ToPointsList();
                         linkPoints.Clear();
                         break;
+
                     case PathLine.Orthogonal:
                         bpoints = GetBezierGeometry(linkPoints).ToPointsList();
                         linkPoints.Clear();
@@ -63,22 +58,16 @@ namespace PathFinderLibrary
             return linkPoints;
         }
 
-
         private static void DetermineOrthogonalPoints(Line lineA, Line lineB, ref List<Point> linkPoints)
         {
-
-
             Line[] primarySet = new Line[2];
             Line[] secondarySet = new Line[2];
 
             primarySet[0] = lineA;
             primarySet[1] = lineB;
 
-
             secondarySet[0] = new Line { Point = new Point(primarySet[0].Point.X, primarySet[1].Point.Y), Vector = new Vector(0, 0) };
             secondarySet[1] = new Line { Point = new Point(primarySet[1].Point.X, primarySet[0].Point.Y), Vector = new Vector(0, 0) };
-
-
 
             Vector CombinedVector = Vector.Add(primarySet[0].Vector, primarySet[1].Vector);
 
@@ -92,27 +81,23 @@ namespace PathFinderLibrary
             //The displacement of object 2 from object 1 is given by d:=p2−p1d:=p2−p1.
             Vector PrimaryDisplacementVector = Vector.Subtract((Vector)primarySet[0].Point, (Vector)primarySet[1].Point);
 
-            // dot product of the difference and the displacement vectors for the primary vectors ( i.e the ones representing start and end) : 
+            // dot product of the difference and the displacement vectors for the primary vectors ( i.e the ones representing start and end) :
             //If the result is positive, then the objects are moving away from each other.
-            //If the result is negative, then the objects are moving towards each other. 
+            //If the result is negative, then the objects are moving towards each other.
             //If the result is 0, then the distance is (at that instance) not changing.
             PrimaryDisplacementVector.Normalize(); //neccessary for calculating vectorlength
             double RelativeMovement = PrimaryDisplacementVector.DotProduct(PrimaryDifferenceVector);
-
 
             Vector vp = Vector.Add(PrimaryDifferenceVector, PrimaryDisplacementVector);
 
             double primaryvectorlength = vp.Length;
 
-
             // Primary Loop
 
             foreach (Line primaryVertex in primarySet)
             {
-
                 // direction vector of primary vertex
                 Vector directionVector = primaryVertex.Vector;
-
 
                 foreach (Line secondaryVertex in secondarySet)
                 {
@@ -122,7 +107,7 @@ namespace PathFinderLibrary
 
                     // type of line depends of relative direction of primary vertices:
                     // if CombinedVector has a length(magnitude), line is basic right angle e.g
-                    // |__  __| 
+                    // |__  __|
                     // else if CombinedVector is has no length(magnitude), the direction of primary vertices are opposed: line is double right angle e.g
                     // |__      __|
                     //    | or |
@@ -131,9 +116,9 @@ namespace PathFinderLibrary
                     // direction is perpindicular
                     if (CombinedVector.X != 0 && CombinedVector.Y != 0)
                     {
-                        // for whatever reason the number 2.2  for the Primary Vector Length determines whether the parrallel or perpindular line 
+                        // for whatever reason the number 2.2  for the Primary Vector Length determines whether the parrallel or perpindular line
                         // can be used
-                        // this is related to the fact that if the direction of the primary vertices are facing inwards they will make any combined vector with 
+                        // this is related to the fact that if the direction of the primary vertices are facing inwards they will make any combined vector with
                         // the displacement vector smaller. Possible related to the fact that 2.2 sqrt is 1.5
                         if (primaryvectorlength > 2.2)
                         {
@@ -147,14 +132,12 @@ namespace PathFinderLibrary
                             if (directionVector.IsPerpindicular(displacementVector))
                                 if (!linkPoints.Contains(secondaryVertex.Point)) linkPoints.Add(secondaryVertex.Point);
                         }
-
                     }
                     // direction is parrallel & same direction
                     else if ((CombinedVector.X == 0 & CombinedVector.Y != 0) || (CombinedVector.Y == 0 & CombinedVector.X != 0))
                     {
                         if (directionVector == displacementVector.GetNormalized())
                             if (!linkPoints.Contains(secondaryVertex.Point)) linkPoints.Add(secondaryVertex.Point);
-
                     }
                     //  direction is parrallel but different directions
                     else if (CombinedVector.X == 0 & CombinedVector.Y == 0)
@@ -169,14 +152,13 @@ namespace PathFinderLibrary
                             if (!directionVector.IsPerpindicular(displacementVector))
                                 linkPoints.Add(primaryVertex.Point.GetMidPoint(secondaryVertex.Point));
                         // Add perpindicular line midpoint
-                        // if line can not be found - with the same direction to that of the primary vertex - 
+                        // if line can not be found - with the same direction to that of the primary vertex -
                         // to connect primary and secondary point  then  midpoint of perpindicular line is added
 
                         if (RelativeMovement < 0)
                             // check if perpindcular
                             if (directionVector.IsPerpindicular(displacementVector))
                                 linkPoints.Add(primaryVertex.Point.GetMidPoint(secondaryVertex.Point));
-
                     }
                 }
             }
@@ -196,7 +178,6 @@ namespace PathFinderLibrary
         //CaliDiagramAndRaft
         public static PathGeometry GetBezierGeometry(List<Point> points)
         {
-
             var myPathFigure = new PathFigure { StartPoint = points.FirstOrDefault() };
             PathSegmentCollection myPathSegmentCollection = new PathSegmentCollection();
 
@@ -221,21 +202,14 @@ namespace PathFinderLibrary
             }
             myPathSegmentCollection.Add(segment);
 
-
             myPathFigure.Segments = myPathSegmentCollection;
 
             var myPathFigureCollection = new PathFigureCollection { myPathFigure };
 
             return new PathGeometry { Figures = myPathFigureCollection };
-
-
         }
 
-
         private static Point GetPoint(Vector a, Vector b) => new Point(a.X * b.X, a.Y * b.Y);
-
-
-
 
         public static PathGeometry GetArcGeometry(Point start, Point end, double r) =>
          new PathGeometry
@@ -259,7 +233,6 @@ namespace PathFinderLibrary
                         }
                      }
                      )
-
          };
 
         public static double DetermineArcRadius(Point start, Point end, double angle)
@@ -273,7 +246,6 @@ namespace PathFinderLibrary
             return l / (sinA * 2);
         }
 
-
         //var controlPoints = new List<Point>();
         //double diff = (lineB.Point.Y - lineA.Point.X) / 3.0;
         //double xDiff = Math.Abs(lineA.Point.X - lineB.Point.X);
@@ -286,12 +258,7 @@ namespace PathFinderLibrary
         //Point pt2 = GetPoint(a, lineA.Vector);
         //pt2 = new Point(lineA.Point.X + diff, lineA.Point.Y);
         //Point pt3 = GetPoint(a, lineB.Vector);
-        //pt3 = new Point(lineB.Point.X - diff, lineB.Point.Y); 
-
-
-
-
-
+        //pt3 = new Point(lineB.Point.X - diff, lineB.Point.Y);
 
         //  public static PathLine PathLine { get; set; }
 
@@ -314,9 +281,5 @@ namespace PathFinderLibrary
         ////{
         ////    PathLine = pathLine;
         ////}
-
-
     }
 }
-
-

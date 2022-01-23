@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace GeometryLibrary
 {
     public static class SideExtension
     {
-
         public static Side FromString(this string value)
         {
             switch (value.ToLower())
@@ -21,10 +15,7 @@ namespace GeometryLibrary
 
                 default: return Side.None;
             }
-
-
         }
-
 
         public static Side ToReverse(this Side value)
         {
@@ -37,8 +28,6 @@ namespace GeometryLibrary
 
                 default: return Side.None;
             }
-
-
         }
 
         public static double ToAngle(this Side value)
@@ -61,7 +50,6 @@ namespace GeometryLibrary
             else if (angle < -135 || angle >= 135) return Side.Top;
             else if (angle < -45 & angle >= -135) return Side.Left;
             return Side.None;
-
         }
 
         public static Vector ToVector(this Side value)
@@ -80,13 +68,11 @@ namespace GeometryLibrary
         // so if A is to the left of B, returns Side.Left
         public static Side RelativeSide(Point pointA, Point pointB)
         {
-
             Vector vec = (pointB - pointA);
 
             double ang = Vector.AngleBetween(vec, new Vector(0, 1));
             Side side = FromAngle(ang);
             return side;
-
         }
 
         // gets the relative side of an element to another
@@ -98,11 +84,7 @@ namespace GeometryLibrary
             if (pointA.Y != pointB.Y)
                 y = (pointA.Y > pointB.Y) ? Side.Top : Side.Bottom;
 
-
             return y;
-
         }
-
     }
-
 }

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -15,17 +12,17 @@ namespace AnimationPathWpf
     {
         public static IEnumerable<DependencyObject> GetAnimations(
             Point startPoint,
-            Point endPoint, 
+            Point endPoint,
             double diameter,
-            Geometry geometry, 
-            byte[] rgb, 
-            Storyboard m_Sb, 
+            Geometry geometry,
+            byte[] rgb,
+            Storyboard m_Sb,
             double pointTime,
-            string m_PointData, 
-            double l, 
-            Style style, 
-            bool showPathAnimation, 
-            bool showParticleAnimation, 
+            string m_PointData,
+            double l,
+            Style style,
+            bool showPathAnimation,
+            bool showParticleAnimation,
             bool showTargetAnimation)
         {
             if (showPathAnimation)
@@ -63,8 +60,6 @@ namespace AnimationPathWpf
                 }
                 yield return ell;
             }
-
-
         }
 
         public static Grid GetRunPoint(byte[] rgb, string m_PointData)
@@ -86,12 +81,9 @@ namespace AnimationPathWpf
             grid.Children.Add(path);
 
             return grid;
-
-
         }
 
-
-        static Ellipse GetEllipse(byte[] rgb)
+        private static Ellipse GetEllipse(byte[] rgb)
         {
             return new Ellipse
             {
@@ -110,7 +102,7 @@ namespace AnimationPathWpf
             };
         }
 
-        static Path GetPath(byte[] rgb, string m_PointData)
+        private static Path GetPath(byte[] rgb, string m_PointData)
         {
             return new Path
             {
@@ -131,7 +123,6 @@ namespace AnimationPathWpf
             };
         }
 
-
         public static Ellipse GetToEllipse(double width, double height, byte[] rgb, Point toPos) => new Ellipse
         {
             HorizontalAlignment = HorizontalAlignment.Left,
@@ -141,13 +132,10 @@ namespace AnimationPathWpf
             Fill = new SolidColorBrush(Color.FromArgb(255, rgb[0], rgb[1], rgb[2])),
             RenderTransform = new TranslateTransform(toPos.X - width / 2, toPos.Y - height / 2),
             Opacity = 0,
-
         };
 
         public static IEnumerable<Timeline> GetPathAnimation(Path path, Point start, Point end, byte[] rgb, Storyboard sb, Geometry geometry, double l, Style style)
         {
-    
-
             //path.ToolTip = string.Format("{0}=>{1}",mapitem.ToString(), toItem.To.ToString());
 
             var particleTime = 1 / l;
@@ -158,21 +146,14 @@ namespace AnimationPathWpf
             Storyboard.SetTargetProperty(pda0, new PropertyPath("(Path.OpacityMask).(GradientBrush.GradientStops)[0].(GradientStop.Offset)"));
             yield return (pda0);
 
-
-
             var pda1 = StoryBoard.Animation3(particleTime);
             Storyboard.SetTarget(pda1, path);
             Storyboard.SetTargetProperty(pda1, new PropertyPath("(Path.OpacityMask).(GradientBrush.GradientStops)[1].(GradientStop.Offset)"));
-           yield return (pda1);
-
-
-  
+            yield return (pda1);
         }
-
 
         public static PathGeometry GetParticlePathGeometry(Point start, Point end, double m_Angle)
         {
-
             PathGeometry pg = new PathGeometry();
             PathFigure pf = new PathFigure();
             pf.StartPoint = start;
@@ -191,10 +172,7 @@ namespace AnimationPathWpf
             pf.Segments.Add(arc);
             pg.Figures.Add(pf);
 
-
             return pg;
         }
-
-
     }
 }

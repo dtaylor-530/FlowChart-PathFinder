@@ -15,7 +15,7 @@
         </Grid>
         <Grid>
             <Grid.DataContext>
-                <local:DesignData/>
+                <local:DesignData />
             </Grid.DataContext>
             <pwpf:NodesControl  x:Name="NodesControl" ItemsSource="{Binding Points}"></pwpf:NodesControl>
         </Grid>

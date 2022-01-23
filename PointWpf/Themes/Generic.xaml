@@ -1,10 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                            xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-                      xmlns:cmd="http://www.galasoft.ch/mvvmlight"
+                    xmlns:cmd="http://www.galasoft.ch/mvvmlight"
                     xmlns:local="clr-namespace:PointWpf">
 
-    <Style x:Key="One"  TargetType="local:NodesControl" >
+    <Style x:Key="One"  TargetType="local:NodesControl">
 
         <Setter Property="ClipToBounds" Value="True"></Setter>
         <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
@@ -12,12 +12,12 @@
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
-                    <Canvas  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                    <Canvas  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <Canvas.RenderTransform>
                             <TransformGroup>
-                                <ScaleTransform ScaleX="{Binding Value, ElementName=Scale}" ScaleY="{Binding Value, ElementName=Scale}"/>
-                                <TranslateTransform X="{Binding Value, ElementName=MoveX}" 
-                                                    Y="{Binding Value, ElementName=MoveY}"/>
+                                <ScaleTransform ScaleX="{Binding Value, ElementName=Scale}" ScaleY="{Binding Value, ElementName=Scale}" />
+                                <TranslateTransform X="{Binding Value, ElementName=MoveX}"
+                                                    Y="{Binding Value, ElementName=MoveY}" />
                             </TransformGroup>
                         </Canvas.RenderTransform>
                     </Canvas>
@@ -27,15 +27,15 @@
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
                 <Style TargetType="ContentPresenter">
-                    <Setter Property="Canvas.Left" Value="{Binding X, Mode=OneWay}"/>
-                    <Setter Property="Canvas.Top" Value="{Binding Y, Mode=OneWay}"/>
+                    <Setter Property="Canvas.Left" Value="{Binding X, Mode=OneWay}" />
+                    <Setter Property="Canvas.Top" Value="{Binding Y, Mode=OneWay}" />
                 </Style>
             </Setter.Value>
         </Setter>
         <Setter Property="ItemTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <Thumb Width="10" Height="10"   >
+                    <Thumb Width="10" Height="10">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="DragDelta">
                                 <cmd:EventToCommand Command="{Binding DragCommand}"  PassEventArgsToCommand="True" />
@@ -57,5 +57,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>

@@ -1,7 +1,6 @@
-﻿
-using System;
-using System.Windows;
+﻿using System;
 using System.Diagnostics;
+using System.Windows;
 
 // From WPFExtensions https://wpfextensions.codeplex.com/
 
@@ -10,15 +9,18 @@ namespace WPFExtensions.AttachedBehaviours
     public static class DragBehaviour
     {
         #region Attached DPs
+
         public static readonly DependencyProperty IsDragEnabledProperty = DependencyProperty.RegisterAttached("IsDragEnabled", typeof(bool), typeof(DragBehaviour), new UIPropertyMetadata(false, OnIsDragEnabledPropertyChanged));
         public static readonly DependencyProperty IsDraggingProperty = DependencyProperty.RegisterAttached("IsDragging", typeof(bool), typeof(DragBehaviour), new UIPropertyMetadata(false));
         public static readonly DependencyProperty XProperty = DependencyProperty.RegisterAttached("X", typeof(double), typeof(DragBehaviour), new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
         public static readonly DependencyProperty YProperty = DependencyProperty.RegisterAttached("Y", typeof(double), typeof(DragBehaviour), new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
         private static readonly DependencyPropertyKey OriginalXPropertyKey = DependencyProperty.RegisterAttachedReadOnly("OriginalX", typeof(double), typeof(DragBehaviour), new UIPropertyMetadata(0.0));
         private static readonly DependencyPropertyKey OriginalYPropertyKey = DependencyProperty.RegisterAttachedReadOnly("OriginalY", typeof(double), typeof(DragBehaviour), new UIPropertyMetadata(0.0));
-        #endregion
+
+        #endregion Attached DPs
 
         #region Get/Set method for Attached Properties
+
         public static bool GetIsDragEnabled(DependencyObject obj)
         {
             return (bool)obj.GetValue(IsDragEnabledProperty);
@@ -78,9 +80,11 @@ namespace WPFExtensions.AttachedBehaviours
         {
             obj.SetValue(OriginalYPropertyKey, value);
         }
-        #endregion
+
+        #endregion Get/Set method for Attached Properties
 
         #region PropertyChanged callbacks
+
         private static void OnIsDragEnabledPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             var element = obj as FrameworkElement;
@@ -130,7 +134,8 @@ namespace WPFExtensions.AttachedBehaviours
                 Debug.WriteLine("DragBehaviour unregistered.", "WPFExt");
             }
         }
-        #endregion
+
+        #endregion PropertyChanged callbacks
 
         private static void OnDragStarted(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -214,4 +219,3 @@ namespace WPFExtensions.AttachedBehaviours
         }
     }
 }
-

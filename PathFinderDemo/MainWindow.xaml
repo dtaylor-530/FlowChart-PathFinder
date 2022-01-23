@@ -15,7 +15,5 @@
         <TabItem Header="Nodes">
             <local:NodesView></local:NodesView>
         </TabItem>
-
     </TabControl>
-
 </Window>

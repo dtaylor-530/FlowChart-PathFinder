@@ -53,7 +53,6 @@ namespace DiagramWpf
             Canvas.SetLeft(VertexOne, X1 = 300);
             Canvas.SetTop(VertexTwo, Y2 = 100);
             Canvas.SetLeft(VertexTwo, X2 = 100);
-
         }
 
         public static readonly DependencyProperty X1Property = DependencyProperty.Register("X1", typeof(double), typeof(CanvasControl), new PropertyMetadata());

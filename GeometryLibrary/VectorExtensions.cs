@@ -1,14 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-
-namespace System.Windows
+﻿namespace System.Windows
 {
-
     public static class VectorExtension
     {
         /// <summary>
@@ -24,7 +15,6 @@ namespace System.Windows
             return unitV == V2;
         }
 
-
         /// <summary>
         /// returns normalized version of vector
         /// </summary>
@@ -34,9 +24,7 @@ namespace System.Windows
         {
             V.Normalize();
             return V;
-
         }
-
 
         /// <summary>
         /// checks the dotproduct = 0 (which amounts to the same thing)
@@ -48,6 +36,7 @@ namespace System.Windows
         {
             return V.DotProduct(V2) == 0;
         }
+
         /// <summary>
         /// the dotproduct of two vectors (=v1.X*V2.X+v1.Y*V2.Y)
         /// </summary>
@@ -73,10 +62,5 @@ namespace System.Windows
             //double ab = Vector.AngleBetween(v, v2);
             return Vector.AngleBetween(vector, horizontalunitVector);
         }
-
-
     }
-
-
-
 }

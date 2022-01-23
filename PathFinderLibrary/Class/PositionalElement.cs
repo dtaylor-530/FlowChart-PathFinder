@@ -1,23 +1,12 @@
-﻿
-using GeometryLibrary;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-
-namespace PathFinderLibrary
+﻿namespace PathFinderLibrary
 {
     //public class PositionalElement
     //{
-
     //    private readonly double seperation;
 
     //    //public double Radius
     //    //{
     //    //    get;set;
-
 
     //    //}
 
@@ -60,7 +49,6 @@ namespace PathFinderLibrary
     //        set { _size = value; }
     //    }
 
-
     //    //public double Size { get; set; }
 
     //    public Point Position { get; set; }
@@ -82,8 +70,6 @@ namespace PathFinderLibrary
     //        }
     //        return new Point(this.Left + Size.X / 2.0, this.Top + Size.Y / 2.0);
     //    }
-
-
 
     //}
 }

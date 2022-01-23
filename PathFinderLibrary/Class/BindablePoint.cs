@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace PathFinderLibrary
@@ -23,6 +19,7 @@ namespace PathFinderLibrary
         }
 
         private Point _value;
+
         public Point Value
         {
             get { return _value; }
@@ -40,14 +37,12 @@ namespace PathFinderLibrary
 
         public Action ValueChanged;
 
-
-
         #region INotifyPropertyChanged Implementation
+
         /// <summary>
         /// Occurs when any properties are changed on this object.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
-
 
         /// <summary>
         /// A helper method that raises the PropertyChanged event for a property.
@@ -72,7 +67,7 @@ namespace PathFinderLibrary
                 this.PropertyChanged(this, e);
             }
         }
-        #endregion
-    }
 
+        #endregion INotifyPropertyChanged Implementation
+    }
 }

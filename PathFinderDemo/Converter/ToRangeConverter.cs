@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
 namespace PathFinderDemo
 {
-
     public class ToRangeConverter : IMultiValueConverter
     {
-
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             if (values.All(_ => _ != DependencyProperty.UnsetValue))
@@ -26,8 +21,4 @@ namespace PathFinderDemo
             throw new NotImplementedException();
         }
     }
-
-
-
-
 }

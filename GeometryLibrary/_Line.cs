@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
-
-
 
 namespace GeometryLibrary.WinForms
 {
-
     // Winforms version of line
     public class Line
     {
@@ -39,7 +33,6 @@ namespace GeometryLibrary.WinForms
             if (determinant == 0) //lines are parrallel
                 return default(Point?);
 
-
             //Cramer's Rule
 
             int x = (int)Math.Round((otherLine.B * C - B * otherLine.C) / determinant);
@@ -50,16 +43,9 @@ namespace GeometryLibrary.WinForms
             return intersectionPoint;
         }
 
-
-
-
-
         public override string ToString()
         {
             return "[" + Start + "], [" + End + "]";
         }
     }
 }
-
-
-

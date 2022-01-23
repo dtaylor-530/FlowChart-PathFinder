@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -11,15 +7,11 @@ namespace PointWpf
 {
     public class NodesControl : ItemsControl
     {
-
-
-
         public object SelectedObject
         {
             get { return (object)GetValue(SelectedObjectProperty); }
             set { SetValue(SelectedObjectProperty, value); }
         }
-
 
         public static readonly DependencyProperty SelectedObjectProperty = DependencyProperty.Register("SelectedObject", typeof(object), typeof(NodesControl), new PropertyMetadata(null));
 
@@ -28,18 +20,13 @@ namespace PointWpf
             NodesControl.ItemsSourceProperty.OverrideMetadata(typeof(NodesControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.None, ItemsSourceChanged, ItemsSourceCoerce));
         }
 
-
-
         private static void ItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-
             foreach (var x in (IEnumerable)e.NewValue)
             {
                 ((PointViewModel)x).PropertyChanged -= (a, b) => NodesControl_PropertyChanged(d, x);
                 ((PointViewModel)x).PropertyChanged += (a, b) => NodesControl_PropertyChanged(d, x);
-
             }
-
 
             //this.WhenAnyValue(_ => _.PointViewModel).Subscribe(_ =>
             //{
@@ -59,7 +46,6 @@ namespace PointWpf
                     (x as PointViewModel).IsSelected = false;
             }
             xx.Dispatcher.InvokeAsync(() => xx.SelectedObject = pvm, System.Windows.Threading.DispatcherPriority.Background, default(System.Threading.CancellationToken));
-
         }
 
         private static object ItemsSourceCoerce(DependencyObject d, object baseValue)
@@ -69,12 +55,9 @@ namespace PointWpf
 
         public NodesControl()
         {
-
             Uri resourceLocater = new Uri("/PointWpf;component/Themes/Generic.xaml", System.UriKind.Relative);
             ResourceDictionary resourceDictionary = (ResourceDictionary)Application.LoadComponent(resourceLocater);
             Style = resourceDictionary["One"] as Style;
         }
-
-
     }
 }

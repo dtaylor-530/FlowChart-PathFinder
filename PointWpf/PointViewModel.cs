@@ -1,10 +1,6 @@
 ﻿using inpce.core.Library.Extensions;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
@@ -34,7 +30,6 @@ namespace PointWpf
             set { this.SetProperty(ref _isSelected, value, PropertyChanged); }
         }
 
-
         public PointViewModel()
         {
             Command = new Command(this);
@@ -44,15 +39,12 @@ namespace PointWpf
         [Browsable(false)]
         public ICommand Command { get; }
 
-
         [Browsable(false)]
         public ICommand DragCommand { get; }
 
         [Browsable(false)]
         public event PropertyChangedEventHandler PropertyChanged;
     }
-
-
 
     public class Command : ICommand
     {
@@ -64,18 +56,18 @@ namespace PointWpf
         {
             return true;
         }
+
         public Command(PointViewModel pvm)
         {
             this.pvm = pvm;
         }
+
         public void Execute(object parameter)
         {
             (pvm as PointViewModel).IsSelected = true;
         }
-
-
-
     }
+
     public class DragCommand : ICommand
     {
         private PointViewModel pvm;
@@ -86,20 +78,17 @@ namespace PointWpf
         {
             return true;
         }
+
         public DragCommand(PointViewModel pvm)
         {
             this.pvm = pvm;
         }
+
         public void Execute(object parameter)
         {
-
-            (pvm as PointViewModel).X +=(int) (parameter as DragDeltaEventArgs).HorizontalChange;
-            (pvm as PointViewModel).Y +=(int)(parameter as DragDeltaEventArgs).VerticalChange;
+            (pvm as PointViewModel).X += (int)(parameter as DragDeltaEventArgs).HorizontalChange;
+            (pvm as PointViewModel).Y += (int)(parameter as DragDeltaEventArgs).VerticalChange;
             (parameter as DragDeltaEventArgs).Handled = true;
         }
-
-
-
     }
-
 }

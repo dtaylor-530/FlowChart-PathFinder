@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -13,7 +10,7 @@ namespace AnimationPathWpf
 {
     public static class StoryBoard
     {
-        public static IEnumerable<Timeline> CreateParticleAnimation(Grid runPoint,  Geometry particle, double pointTime)           
+        public static IEnumerable<Timeline> CreateParticleAnimation(Grid runPoint, Geometry particle, double pointTime)
         {
             TransformGroup tfg = new TransformGroup();
             MatrixTransform mtf = new MatrixTransform();
@@ -34,19 +31,10 @@ namespace AnimationPathWpf
             Storyboard.SetTarget(maup, runPoint);
             Storyboard.SetTargetProperty(maup, new PropertyPath("(Grid.RenderTransform).Children[0].(MatrixTransform.Matrix)"));
             yield return maup;
-
-
-
-
-            //var eda = Animation2(particleTime);
-            //Storyboard.SetTarget(eda, toEll);
-            //Storyboard.SetTargetProperty(eda, new PropertyPath("(Ellipse.OpacityMask).(GradientBrush.GradientStops)[1].(GradientStop.Offset)"));
-            //sb.Children.Add(eda);
         }
 
         public static IEnumerable<Timeline> CreateTargetAnimation(Ellipse toEll, double pointTime)
         {
-
             double particleTime = pointTime / 2d;
 
             var ellda = Animation1(particleTime);
@@ -69,10 +57,8 @@ namespace AnimationPathWpf
             toEll.OpacityMask = rgBrush;
         }
 
-
         public static LinearGradientBrush GetGradientBrush(Point startPoint, Point endPoint)
         {
-
             return
                new LinearGradientBrush
                {
@@ -85,6 +71,7 @@ namespace AnimationPathWpf
                    })
                };
         }
+
         public static ColorAnimation ColorAnimation(double pointTime) => new ColorAnimation
         {
             To = Color.FromArgb(0, 0, 0, 0),
@@ -112,7 +99,6 @@ namespace AnimationPathWpf
 
         public static DoubleAnimation Animation3(double particleTime) => new DoubleAnimation
         {
-            //pda1.From = 0.5; //此处解开注释 值设为0-1 会有不同的轨迹呈现效果
             To = 1,
             Duration = new Duration(TimeSpan.FromSeconds(particleTime)),
             FillBehavior = FillBehavior.HoldEnd

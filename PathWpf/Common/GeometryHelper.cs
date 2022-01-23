@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Media;
+
 namespace AnimationPathWpf
 {
     public static class GeometryHelper
@@ -49,8 +46,10 @@ namespace AnimationPathWpf
             {
                 case PolyLineSegment pls:
                     return pls.Points.Last();
+
                 case LineSegment ls:
                     return ls.Point;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }

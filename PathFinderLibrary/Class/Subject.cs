@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PathFinderLibrary
 {
-
     public class Observer<T> : IObserver<T>
     {
         private IDisposable unsubscriber;
-
-
 
         public virtual void Subscribe(IObservable<T> provider)
         {
@@ -32,8 +26,7 @@ namespace PathFinderLibrary
 
         public virtual void OnNext(T value)
         {
-                    }
-
+        }
 
         public virtual void Unsubscribe()
         {
@@ -41,10 +34,8 @@ namespace PathFinderLibrary
         }
     }
 
-
     public class Subject<T> : Observer<T>, IObservable<T>
     {
-
         private List<IObserver<T>> observers = new List<IObserver<T>>();
 
         public IDisposable Subscribe(IObserver<T> observer)
@@ -60,7 +51,7 @@ namespace PathFinderLibrary
         }
     }
 
-    class Unsubscriber<T> : IDisposable
+    internal class Unsubscriber<T> : IDisposable
     {
         private List<IObserver<T>> _observers;
         private IObserver<T> _observer;

@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using GeometryLibrary.WinForms;
+using System.Collections.Generic;
 using System.Windows;
-using GeometryLibrary.WinForms;
-
 
 public class Bezier
 {
@@ -12,6 +11,7 @@ public class Bezier
 
     // Made these global so I could diagram the top solution
     public Line L12;
+
     public Line L23;
     public Line L34;
 
@@ -41,9 +41,9 @@ public class Bezier
     /// and the midpoint of line L1223 being P1223 ...
     /// </summary>
     /// <param name="lines"></param>
-    public void  SplitBezier(List<Line> lines)
+    public void SplitBezier(List<Line> lines)
     {
-        lines =lines?? new List<Line>();
+        lines = lines ?? new List<Line>();
 
         L12 = new Line(this.P1, this.P2);
         L23 = new Line(this.P2, this.P3);
@@ -77,7 +77,7 @@ public class Bezier
             bz2.SplitBezier(lines);
         }
 
-        return ;
+        return;
     }
 
     /// <summary>

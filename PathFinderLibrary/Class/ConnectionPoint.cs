@@ -1,16 +1,10 @@
-﻿
-using GeometryLibrary;
+﻿using GeometryLibrary;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace PathFinderLibrary
 {
-
     public class ConnectionPoint : IConnectionPoint, INotifyPropertyChanged
     {
         private double size;
@@ -28,6 +22,7 @@ namespace PathFinderLibrary
         //public Point Position { get; set; }
 
         private Point position;
+
         public Point Position
         {
             get
@@ -40,11 +35,7 @@ namespace PathFinderLibrary
                 position = value;
                 NotifyChanged("Position");
             }
-
         }
-
-
-
 
         //public bool IsPrimary { get; set; }
 
@@ -65,8 +56,6 @@ namespace PathFinderLibrary
             }
         }
 
-
-
         private void OffsetPoint(Point point)
         {
             switch (Side)
@@ -74,25 +63,27 @@ namespace PathFinderLibrary
                 case Side.Top:
                     point.Offset(0, -size);
                     break;
+
                 case Side.Bottom:
                     point.Offset(0, size);
                     break;
+
                 case Side.Right:
                     point.Offset(size, 0);
                     break;
+
                 case Side.Left:
                     point.Offset(-size, 0);
                     break;
             }
         }
 
-
         #region INotifyPropertyChanged Implementation
+
         /// <summary>
         /// Occurs when any properties are changed on this object.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
-
 
         /// <summary>
         /// A helper method that raises the PropertyChanged event for a property.
@@ -117,9 +108,7 @@ namespace PathFinderLibrary
                 this.PropertyChanged(this, e);
             }
         }
-        #endregion
 
+        #endregion INotifyPropertyChanged Implementation
     }
-
-
 }

@@ -1,39 +1,18 @@
-﻿
-using GeometryLibrary;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-
-namespace PathFinderLibrary
+﻿namespace PathFinderLibrary
 {
-
-
-
-
-
-
-
     //public class Path : INotifyPropertyChanged
     //{
     //    private Rect area;
     //    private ConnectionPoint sourceTip;
     //    private ConnectionPoint sinkTip;
 
-    
-
     //    public Point StartPoint=> WayPoints[0];
-  
+
     //    public Point EndPoint => WayPoints.Last();
 
     //    public Point MiddlePoint=> WayPoints[(WayPoints.Count / 2)];
 
     //    ConnectionPointToLineConverter  converter = new ConnectionPointToLineConverter();
-
 
     //    public List<Point> GetPath() => PathCalculator.FindPath((Line)converter.Convert(sourceTip,null,null,null), (Line)converter.Convert(sinkTip,null,null,null));
 
@@ -47,15 +26,11 @@ namespace PathFinderLibrary
     //        }
     //    }
 
-
-
-
     //    #region INotifyPropertyChanged Implementation
     //    /// <summary>
     //    /// Occurs when any properties are changed on this object.
     //    /// </summary>
     //    public event PropertyChangedEventHandler PropertyChanged;
-
 
     //    /// <summary>
     //    /// A helper method that raises the PropertyChanged event for a property.
@@ -82,25 +57,17 @@ namespace PathFinderLibrary
     //    }
     //    #endregion
 
-
-
-
     //    public Path(ConnectionPoint sourceTip, ConnectionPoint sinkTip) //: base((Point)(sourceTip.Position - sinkTip.Position))
     //    {
-
     //        SourceTip = sourceTip;
     //        SinkTip = sinkTip;
     //        Init();
     //    }
 
-
     //    private void Init()
     //    {
     //        UpdateWayPoints();
     //    }
-
-
-
 
     //    public bool IsFullConnection
     //    {
@@ -124,10 +91,6 @@ namespace PathFinderLibrary
     //            }
     //        }
     //    }
-
-
-
-
 
     //    public ConnectionPoint SourceTip
     //    {
@@ -164,13 +127,11 @@ namespace PathFinderLibrary
     //            {
     //                sinkTip = value;
     //                sinkTip.PropertyChanged += SinkTip_PropertyChanged;
-    //                //  (sinkTip as INotifyPropertyChanged).PropertyChanged += new WeakINPCEventHandler(SinkTip_PropertyChanged).Handler; 
+    //                //  (sinkTip as INotifyPropertyChanged).PropertyChanged += new WeakINPCEventHandler(SinkTip_PropertyChanged).Handler;
     //                NotifyChanged("SinkTip");
     //            }
     //        }
     //    }
-
-
 
     //    private void UpdateConnectionPoints0()
     //    {
@@ -178,7 +139,6 @@ namespace PathFinderLibrary
 
     //    }
     //    //private List<Point> Points;
-
 
     //        private void SourceTip_PropertyChanged(object sender, PropertyChangedEventArgs e)
     //    {
@@ -200,8 +160,5 @@ namespace PathFinderLibrary
     //            //base.IsCompleted = (sender as ConnectorTipViewModel).Target != null;
     //    }
 
-
-
     //}
-
 }

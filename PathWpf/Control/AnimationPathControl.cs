@@ -1,10 +1,8 @@
 ﻿using System;
 
 using System.Linq;
-using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -27,16 +25,14 @@ namespace AnimationPathWpf
         public static readonly DependencyProperty ShowPathProperty = DependencyProperty.Register("ShowPath", typeof(bool), typeof(AnimationPathControl), new PropertyMetadata(true, ShowPathChanged));
         public static readonly DependencyProperty ShowTargetProperty = DependencyProperty.Register("ShowTarget", typeof(bool), typeof(AnimationPathControl), new PropertyMetadata(true, ShowTargetChanged));
 
-
-        readonly ISubject<double> DiameterChanges = new Subject<double>();
-        readonly ISubject<double> SpeedChanges = new Subject<double>();
-        readonly ISubject<Geometry> PathChanges = new Subject<Geometry>();
-        readonly ISubject<Style> StyleChanges = new Subject<Style>();
-        readonly ISubject<bool> ShowPathChanges = new Subject<bool>();
-        readonly ISubject<bool> ShowParticleChanges = new Subject<bool>();
-        readonly ISubject<bool> ShowTargetChanges = new Subject<bool>();
+        private readonly ISubject<double> DiameterChanges = new Subject<double>();
+        private readonly ISubject<double> SpeedChanges = new Subject<double>();
+        private readonly ISubject<Geometry> PathChanges = new Subject<Geometry>();
+        private readonly ISubject<Style> StyleChanges = new Subject<Style>();
+        private readonly ISubject<bool> ShowPathChanges = new Subject<bool>();
+        private readonly ISubject<bool> ShowParticleChanges = new Subject<bool>();
+        private readonly ISubject<bool> ShowTargetChanges = new Subject<bool>();
         private static readonly Random rd = new Random();
-
 
         public bool ShowParticle
         {
@@ -56,13 +52,11 @@ namespace AnimationPathWpf
             set { SetValue(ShowTargetProperty, value); }
         }
 
-
         public object Path
         {
             get { return (object)GetValue(PathProperty); }
             set { SetValue(PathProperty, value); }
         }
-
 
         public double Speed
         {
@@ -81,7 +75,6 @@ namespace AnimationPathWpf
             get { return (Style)GetValue(PathStyleProperty); }
             set { SetValue(PathStyleProperty, value); }
         }
-
 
         private static void DiameterChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -103,10 +96,12 @@ namespace AnimationPathWpf
         {
             (d as AnimationPathControl).StyleChanges.OnNext(e.NewValue as Style);
         }
+
         private static void ShowParticleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             (d as AnimationPathControl).ShowParticleChanges.OnNext((bool)e.NewValue);
         }
+
         private static void ShowPathChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             (d as AnimationPathControl).ShowPathChanges.OnNext((bool)e.NewValue);
@@ -117,7 +112,17 @@ namespace AnimationPathWpf
             (d as AnimationPathControl).ShowTargetChanges.OnNext((bool)e.NewValue);
         }
 
-        class Show { public Show(bool a, bool b, bool c) { Path = a; Particle = b; Target = c; } public bool Path { get; } public bool Particle { get; } public bool Target { get; } }
+        private class Show
+        {
+            public Show(bool a, bool b, bool c)
+            {
+                Path = a; Particle = b; Target = c;
+            }
+
+            public bool Path { get; }
+            public bool Particle { get; }
+            public bool Target { get; }
+        }
 
         public AnimationPathControl()
         {
@@ -128,7 +133,6 @@ namespace AnimationPathWpf
                ShowParticleChanges.StartWith(ShowParticle),
                ShowTargetChanges.StartWith(ShowTarget), (a, b, c) => new Show(a, b, c));
 
-
             var otherObservable = PathChanges
                    .Where(a => a != null)
                .CombineLatest(
@@ -136,7 +140,6 @@ namespace AnimationPathWpf
                SpeedChanges.StartWith(Speed),
                StyleChanges.StartWith(Style),
                (geo, dia, speed, style) => (geo, dia, speed, style));
-    
 
             showObservable
                 .CombineLatest(otherObservable, (a, b) => (b, a))
@@ -148,7 +151,7 @@ namespace AnimationPathWpf
 
                   if (geo is PathGeometry geometry)
                   {
-                    //  end = (geometry).Figures.ElementAt(0).StartPoint;
+                      //  end = (geometry).Figures.ElementAt(0).StartPoint;
                       start = (geometry).Figures.ElementAt((geometry).Figures.Count - 1).StartPoint;
                       end = GeometryHelper.GetEndPoint(geometry);
                   }
@@ -161,7 +164,6 @@ namespace AnimationPathWpf
                   double l = geo.GetLength();
                   if (l != 0)
                   {
-
                       double pointTime = l / speed;
                       byte[] rgb = new byte[] { (byte)rd.Next(0, 255), (byte)rd.Next(0, 255), (byte)rd.Next(0, 255) };
                       Storyboard storyBoard = new Storyboard();
@@ -185,4 +187,3 @@ namespace AnimationPathWpf
         }
     }
 }
-

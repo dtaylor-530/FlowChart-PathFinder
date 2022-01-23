@@ -8,17 +8,16 @@
         <Setter Property="Foreground" Value="DarkGray" />
     </Style>
 
-
     <Style x:Key="PointViewer" TargetType="{x:Type local:PointViewer}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:PointViewer}">
-                    <UniformGrid Width="200" >
-                        <Label Content="X"/>
-                        <TextBlock Name="visibilityColumn" Text="{Binding Path=X, StringFormat=N1,RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource TextBlockStyle}" >
+                    <UniformGrid Width="200">
+                        <Label Content="X" />
+                        <TextBlock Name="visibilityColumn" Text="{Binding Path=X, StringFormat=N1,RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource TextBlockStyle}">
                         </TextBlock>
-                        <Label Content="Y"/>
-                        <TextBlock Name="visibilityColumn2" Text="{Binding Path=Y, StringFormat=N1,RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource TextBlockStyle}"/>
+                        <Label Content="Y" />
+                        <TextBlock Name="visibilityColumn2" Text="{Binding Path=Y, StringFormat=N1,RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource TextBlockStyle}" />
                     </UniformGrid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
@@ -27,23 +26,20 @@
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="visibilityColumn2" Property="Foreground" Value="Black" />
                         </Trigger>
-       
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-  
-    <!--<Label x:Key="VertexOne" 
+    <!--<Label x:Key="VertexOne"
                            Content="VertexOne"
                            extbehaviour:DragBehaviour.IsDragEnabled="True"
                            extbehaviour:DragBehaviour.X="{Binding RelativeSource={RelativeSource Self},Path=(Canvas.Left)}"
                            extbehaviour:DragBehaviour.Y="{Binding RelativeSource={RelativeSource Self},Path=(Canvas.Top)}"
                            Background="CadetBlue"
                                                     Canvas.Left="200"
-                           Canvas.Top="200"
-                           >
+                           Canvas.Top="200">
     </Label>
     <Label x:Key="VertexTwo"
                            Content="VertexTwo"
@@ -54,6 +50,4 @@
                            Canvas.Left="300"
                            Canvas.Top="100">
     </Label>-->
-
-
 </ResourceDictionary>

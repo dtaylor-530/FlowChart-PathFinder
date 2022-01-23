@@ -1,10 +1,6 @@
 ﻿using GeometryLibrary;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
@@ -12,17 +8,13 @@ namespace PathFinderLibrary
 {
     public class ConnectionPointToLineConverter : IMultiValueConverter
     {
-
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             return CreateLine((Vector)values[0], (Point)values[1]);
-
         }
 
-
-
         public static Line CreateLine(Vector vector, Point point)
-        {           
+        {
             return new Line
             {
                 Vector = vector,
@@ -35,5 +27,4 @@ namespace PathFinderLibrary
             throw new NotImplementedException();
         }
     }
-
 }

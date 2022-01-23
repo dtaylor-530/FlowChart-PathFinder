@@ -1,10 +1,5 @@
 ﻿using GeometryLibrary;
-using PathFinderLibrary;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -21,7 +16,6 @@ namespace PathFinderLibrary
         public static readonly DependencyProperty PathLineProperty = DependencyProperty.Register("PathLine", typeof(PathLine), typeof(PathPolyLine), new PropertyMetadata(pathLine, PathLineChanged));
         public static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(PathPolyLine), new PropertyMetadata(0d, AngleChanged));
         public static readonly DependencyProperty ConnectionPointsProperty = DependencyProperty.Register("ConnectionPoints", typeof(PointCollection), typeof(PathPolyLine), new PropertyMetadata(null));
-
 
         public PathLine PathLine
         {
@@ -47,7 +41,6 @@ namespace PathFinderLibrary
             set { SetValue(StartPointProperty, value); }
         }
 
-
         public object EndPoint
         {
             get { return (object)GetValue(EndPointProperty); }
@@ -60,25 +53,24 @@ namespace PathFinderLibrary
         {
             (d as PathPolyLine).UpdateConnectionPoints();
         }
+
         private static void PathLineChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             (d as PathPolyLine).UpdateConnectionPoints();
         }
-
 
         static PathPolyLine()
         {
             //DefaultStyleKeyProperty.OverrideMetadata(typeof(PathPolyLine), new FrameworkPropertyMetadata(typeof(PathPolyLine)));
         }
 
-
         public PathPolyLine()
         {
             Polyline = new Polyline();
             Polyline.Stroke = Brushes.Gray;
- 
+
             Polyline.StrokeThickness = 2;
-       
+
             this.Content = Polyline;
         }
 
@@ -89,7 +81,7 @@ namespace PathFinderLibrary
             if (startConnection != null && endConnection != null)
             {
                 List<Point> points = null;
-           
+
                 points = GetPoints(startConnection, endConnection);
 
                 PointCollection pointCollection = new PointCollection();
@@ -105,12 +97,10 @@ namespace PathFinderLibrary
             }
         }
 
-        List<Point> GetPoints(IConnectionPoint startConnection, IConnectionPoint endConnection) =>
+        private List<Point> GetPoints(IConnectionPoint startConnection, IConnectionPoint endConnection) =>
            PathCalculator.FindPath(
               ConnectionPointToLineConverter.CreateLine(startConnection.Side.ToVector(), startConnection.Position),
               ConnectionPointToLineConverter.CreateLine(endConnection.Side.ToVector(), endConnection.Position),
                PathLine, Angle);
-
-
     }
 }

@@ -16,12 +16,10 @@ namespace PathFinderDemo
 
     public class DesignData
     {
-
         public PointViewModel[] Points => new[] {
             new PointViewModel { X = 50, Y = 70 },
             new PointViewModel { X = 120, Y = 130 },
             new PointViewModel { X = 70, Y = 102 }
             };
-
     }
 }

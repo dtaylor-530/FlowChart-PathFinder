@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace GeometryLibrary
 {
-
     public static class PointExtension
     {
         public static double DistanceToPoint(this Point point, Point point2)
@@ -39,7 +35,6 @@ namespace GeometryLibrary
             double YDiff = point2.Y - point1.Y;
 
             return new Point(point1.X + XDiff / 2, point1.Y + YDiff / 2);
-
         }
 
         public static Point Offset(this Point myPoint, Point otherPoint)
@@ -47,17 +42,14 @@ namespace GeometryLibrary
             Point offsetPoint = myPoint;
             offsetPoint.Offset(otherPoint.X, otherPoint.Y);
             return offsetPoint;
-
         }
+
         public static Point Offset(this Point myPoint, double distance)
         {
             Point offsetPoint = myPoint;
             offsetPoint.Offset(distance, distance);
             return offsetPoint;
-
         }
-
-
 
         /// <summary>
         ///  converts the relative positions of two points into their absolute equivalents
@@ -66,7 +58,6 @@ namespace GeometryLibrary
 
         public static List<Point> GetAbsolutePoints(Point A, Point B)
         {
-
             Rect Area = new Rect(A, B);
 
             // SourceA and SourceB are the opposite corners of a rectangle
@@ -74,13 +65,9 @@ namespace GeometryLibrary
                                    {
                                        new Point(A.X  <  B.X ? 0d : Area.Width, A.Y  <  B.Y ? 0d : Area.Height ),
                                        new Point(A.X  >  B.X ? 0d : Area.Width, A.Y  > B.Y ? 0d : Area.Height),
-
                 };
 
             return Points;
-
         }
     }
-
-
 }
